@@ -1,0 +1,123 @@
+/*
+ * VERIFICA ESTA SECCIÓN:
+ * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
+ * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
+ * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
+ */
+@font-face {
+    font-family: 'PressStart2P'; /* Nombre de la fuente que usarás */
+    src: url('./fonts/PressStart2P.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --color-header: #b0c4de;
+    --color-button: #87cefa;
+    --color-text: #000000;
+}
+
+/* Base y tipografía */
+body {
+    margin: 0;
+    padding: 0;
+    /* Usa el nombre de la fuente aquí */
+    font-family: 'PressStart2P', sans-serif; 
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+/* Encabezado principal (Banner Azul Claro) */
+.header {
+    width: 100%;
+    background-color: var(--color-header); 
+    padding: 15px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 2px solid #8f9db0; 
+    margin-top: 0; 
+}
+
+.header h1 {
+    color: var(--color-text);
+    /* Se recomienda reducir el tamaño de fuente para PressStart2P, ya que suele ser muy grande */
+    font-size: 2em; 
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px; 
+}
+
+/* Contenido Central */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; 
+    padding: 20px;
+}
+
+/* Contenedor de la Imagen */
+.logo-container {
+    margin: 20px 0;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-text);
+}
+
+.logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+/* Texto de Instrucción */
+.instruction-text {
+    color: var(--color-text);
+    /* Se recomienda reducir el tamaño de fuente para PressStart2P */
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Botón "Enter" */
+.enter-button {
+    background-color: var(--color-button);
+    color: var(--color-text);
+    /* Usa el nombre de la fuente aquí */
+    font-family: 'PressStart2P', sans-serif;
+    /* Se recomienda reducir el tamaño de fuente para PressStart2P */
+    font-size: 1.2em;
+    padding: 15px 40px;
+    border: 3px solid var(--color-text);
+    border-radius: 8px; 
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.1s ease;
+    /* Efecto 3D pixelado */
+    box-shadow: 4px 4px 0px 0px #000000; 
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.enter-button:hover {
+    background-color: #6495ed;
+}
+
+.enter-button:active {
+    /* Efecto de "presionado" al hacer click */
+    box-shadow: 0px 0px 0px 0px #000000;
+    top: 4px;
+    left: 4px;
+}

@@ -4,7 +4,7 @@ const tutorialSteps = [
         label: "Paso 1:",
         title: "Escoger Metodologia",
         instruction: "Elegir la metodologia SCRUM o PMBOK <br> del caso propuesto",
-        image: "../../src/img/paso1.png" 
+        image: "../src/img/paso1.png" 
     },
     {
         label: "Paso 2:",
@@ -16,13 +16,13 @@ const tutorialSteps = [
         label: "Paso 3:",
         title: "Toma buenas decisiones",
         instruction: "Cada elección afectará el <br> tiempo, costo, calidad y motivación del equipo. <br> ¡Toma las decisiones correctas y lleva tu proyecto al éxito!",
-        image: "../../src/img/paso3.png"
+        image: "../src/img/paso3.png"
     },
     {
         label: "Paso 4:",
         title: "Resultados y Retroalimentación",
         instruction: "Entregar el producto final al cliente <br> y realizar la retrospectiva del equipo",
-        image: "../../src/img/paso4.png"
+        image: "../src/img/paso4.png"
     }
 ];
 
@@ -64,7 +64,7 @@ function updateStep(index) {
         prevButton.disabled = false; // Debe estar activo
         // **IMPORTANTE:** Aquí se cambia la función del botón
         prevButton.onclick = () => { 
-            location.href = '../../views/intro.html';
+            location.href = '../views/intro.html';
         };
 
     } else {

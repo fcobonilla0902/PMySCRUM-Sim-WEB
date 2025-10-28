@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMYSCURM - Inicio</title>
+    <title>PMYSCRUM - Inicio</title>
     <link rel="stylesheet" href="src/css/index.css"> 
 </head>
-<body>
-    
+<body id="game-screen">
+
     <div class="header"> 
-        <h1>Bienvenido a PMYSCURM Sim</h1>
+        <h1>PMYSCRUM Sim</h1>
     </div>
 
     <div class="content">
@@ -17,10 +17,11 @@
             <img src="src/img/Logo_1.png" alt="PMYSCURM Sim Logo">
         </div>
 
-        <p class="instruction-text">¡PULSA ENTER PARA COMENZAR!</p>
+        <p class="instruction-text blink">¡PULSA START PARA COMENZAR!</p>
 
-        <button class="enter-button" onclick="alert('¡Comenzar!')">Enter</button>
+        <button class="enter-button" onclick="location.href='views/intro.html';">START</button>
     </div>
+    
 
 </body>
 </html>

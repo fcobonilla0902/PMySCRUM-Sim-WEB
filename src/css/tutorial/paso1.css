@@ -1,0 +1,322 @@
+/* 🚀 Importa la fuente "Press Start 2P" de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    /* Fondo y Base (Mazmorra y Leyenda) */
+    --color-background: #0D1B2A;      
+    --color-header: #1B263B;          
+    
+    /* Colores Principales de Aventura / Resalte */
+    --color-border-accent: #E3B448;   /* Dorado viejo/bronce */
+    --color-text-light: #F0F4F8;      
+    --color-text-dark: #000000;       
+    
+    /* HUD y Elementos de Interfaz */
+    --color-step-bg: #415A77;         
+    --color-step-label: #E0A800;      /* Amarillo-Oro fuerte */
+
+    /* ============== NUEVOS COLORES DE BOTÓN: Reliquia Ancestral ============== */
+    --color-nav-button-next: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
+    --color-nav-button-next-hover: #3A5F90; 
+    
+    --color-nav-button-prev: #7C8B99;     /* Nuevo: Gris Piedra/Plata para 'Anterior' */
+    --color-nav-button-prev-hover: #607180; 
+}
+
+/* 👾 Base y CRT Effect */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive; 
+    background-color: var(--color-background); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow: hidden; 
+    color: var(--color-text-light); 
+}
+
+/* Simulación de pantalla CRT - mantener */
+#game-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.4) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none; 
+    opacity: 0.3;
+    z-index: 100;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    background-color: var(--color-header); /* Nuevo azul oscuro */
+    padding: 20px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    z-index: 1;
+
+    box-shadow: 
+        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
+        inset 0 -2px 0 0 rgba(0, 0, 0, 0.2); 
+}
+.header h1 {
+    color: var(--color-border-accent); /* Título dorado/bronce */
+    font-size: 1.5em; 
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 4px; 
+}
+
+/* Contenido y Burbuja */
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+    z-index: 1;
+}
+/* ... (tu sección :root se mantiene igual con los últimos colores de botones) ... */
+
+/* ... (tu sección :root se mantiene igual) ... */
+
+/* Personaje y Burbuja (Posición Fija a la derecha) */
+.character-container {
+    position: fixed; 
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    /* Mantenemos column-reverse para que la burbuja esté visualmente encima */
+    flex-direction: column-reverse; 
+    align-items: center;
+    z-index: 10;
+    gap: 15px; /* Espacio entre burbuja y personaje */
+}
+
+/* 🗣️ Burbuja de diálogo mejorada */
+.dialog-bubble {
+    background: linear-gradient(135deg, var(--color-step-bg), #3A506B);
+    border: 4px solid var(--color-border-accent);
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 320px;
+    color: var(--color-text-light);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8em;
+    line-height: 1.6;
+    text-align: center;
+    position: relative;
+    box-shadow: 
+        6px 6px 0px 0px rgba(0,0,0,0.3),
+        inset 2px 2px 0px 0px rgba(255,255,255,0.1);
+    text-shadow: 1px 1px 0px #000;
+    
+    /* Revertir ajustes de posición lateral */
+    margin-right: 0;
+    margin-bottom: 0; 
+}
+
+/* Triángulo de la burbuja que apunta hacia abajo (contenido) */
+.dialog-bubble::after {
+    content: '';
+    position: absolute;
+    /* Apunta hacia ABAJO, centrado */
+    bottom: -20px; 
+    left: 50%; 
+    transform: translateX(-50%); /* Centra horizontalmente */
+    
+    /* Configuración de la punta del triángulo */
+    border-top: 20px solid var(--color-step-bg); /* La base y el cuerpo de la flecha */
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 0; /* Elimina la línea inferior */
+    
+    z-index: 1; 
+    filter: none; /* Quitamos el filtro de sombra, usaremos el borde ::before */
+}
+
+/* Borde del Triángulo de la burbuja (marco) */
+.dialog-bubble::before {
+    content: '';
+    position: absolute;
+    /* Ligeramente más grande y más abajo que el 'after' */
+    bottom: -24px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Configuración de la punta del triángulo (borde) */
+    border-top: 24px solid var(--color-border-accent); /* La base y el cuerpo del borde */
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 0; 
+    
+    z-index: 0; 
+}
+
+/* 🕹️ Panel de paso (HUD) */
+.step-indicator {
+    background-color: var(--color-step-bg); /* Gris azulado medio */
+    border: 3px solid var(--color-border-accent); /* Borde dorado/bronce */
+    padding: 15px 30px;
+    margin: 30px 0 20px 0;
+    text-align: left;
+    box-shadow: 4px 4px 0px 0px var(--color-text-dark); 
+    max-width: 390px;
+    border-radius: 35px;
+}
+
+.step-label {
+    color: var(--color-step-label); /* Amarillo-Oro fuerte */
+    font-size: 0.8em;
+    margin-bottom: 5px !important;
+}
+
+.step-title {
+    color: var(--color-text-light);
+    font-size: 1.1em;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+/* Imagen del tutorial */
+.tutorial-image-container {
+    margin: 15px 0;
+    border: 4px dashed var(--color-border-accent); /* Borde dorado/bronce */
+    padding: 10px;
+}
+
+/* ... (el resto del CSS del Header, Dialog-Bubble, Step-Indicator es el mismo) ... */
+
+/* Botones de navegación */
+.navigation-controls {
+    display: flex;
+    gap: 80px;
+    margin-top: 20px;
+}
+
+.game-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    padding: 15px 35px;
+    border: 4px solid var(--color-text-dark);
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 4px 4px 0px 0px var(--color-text-dark);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.nav-button.next {
+    /* Botón 'Siguiente' - Azul Zafiro Oscuro */
+    background-color: var(--color-nav-button-next);
+    color: var(--color-text-light); /* Texto blanco para mejor contraste en fondo oscuro */
+}
+
+.nav-button.previous {
+    /* Botón 'Anterior' - Gris Piedra/Plata */
+    background-color: var(--color-nav-button-prev);
+    color: var(--color-text-dark); /* Texto oscuro para mejor contraste en fondo claro/medio */
+}
+
+.nav-button.next:hover {
+    background-color: var(--color-nav-button-next-hover);
+}
+
+.nav-button.previous:hover {
+    background-color: var(--color-nav-button-prev-hover); 
+}
+
+.game-button:active {
+    box-shadow: 0px 0px 0px 0px var(--color-text-dark);
+    top: 4px;
+    left: 4px;
+}
+
+/* ... (el resto del CSS del personaje es el mismo) ... */
+
+/* ======================================= */
+/* ===== PERSONAJE - VERSIÓN IMAGEN (Mantenida) ===== */
+/* ======================================= */
+
+.character {
+    width: 120px;
+    height: 200px;
+    position: relative;
+    image-rendering: pixelated;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.pixel-character-image {
+    width: 100px;
+    height: auto;
+    image-rendering: pixelated; 
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) scale(1.5); 
+    
+    /* Efecto de Flotar (Float) */
+    animation: float 2.5s ease-in-out infinite;
+    
+    /* Efectos de Estilo */
+    filter: drop-shadow(4px 4px 0 #000); 
+    z-index: 2;
+}
+
+.character-shadow {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 15px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    filter: blur(3px);
+    z-index: 1;
+    animation: shadow-pulse 3s ease-in-out infinite;
+}
+
+/* ANIMACIONES DE IMAGEN */
+@keyframes float {
+    0%, 100% { 
+        transform: translateX(-50%) scale(1.5) translateY(0);
+    }
+    50% { 
+        transform: translateX(-50%) scale(1.5) translateY(-8px);
+    }
+}
+@keyframes shadow-pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.6;
+    }
+}
+.character:hover .pixel-character-image {
+    filter: drop-shadow(4px 4px 0 #000) brightness(1.1);
+    transform: translateX(-50%) scale(1.52) translateY(-4px);
+    transition: all 0.3s ease;
+}

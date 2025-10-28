@@ -1,0 +1,219 @@
+/*
+ * VERIFICA ESTA SECCIÓN:
+ * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
+ * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
+ * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
+ */
+/* AÑADIDO: Importa la fuente "Press Start 2P" desde la web */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    /* Fondo y Base (Mazmorra y Leyenda) */
+    --color-background: #0D1B2A;      /* Azul medianoche muy oscuro */
+    --color-header: #1B263B;          /* Azul pizarra oscuro */
+    
+    /* Colores Principales de Aventura / Resalte */
+    --color-border-accent: #E3B448;   /* Dorado viejo/bronce */
+    --color-text-light: #F0F4F8;      /* Blanco/Gris claro para texto principal */
+    --color-text-dark: #000000;       /* Negro */
+    
+    /* HUD y Elementos de Interfaz (Reemplaza --color-step-bg) */
+    --color-card-bg: #415A77;         /* Nuevo: Usamos el color del HUD como fondo de tarjeta */
+    --color-step-label: #E0A800;      /* Amarillo-Oro fuerte */
+
+    /* Colores de Botón/Acción (Adaptados de tu lista) */
+    --color-button-primary: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
+    --color-button-primary-hover: #3A5F90; 
+    --color-coming-soon: #E3B448; /* Usamos el color de acento para que no choque */
+}
+
+/* 👾 Efecto de escaneo y tipografía base de juego */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--color-background); /* APLICADO: Fondo oscuro de mazmorra */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+/* 📺 Simulación de pantalla CRT */
+#game-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.4) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none; 
+    opacity: 0.3;
+    z-index: 100;
+}
+
+/* Encabezado principal (Banner de Título) */
+.header {
+    width: 100%;
+    background-color: var(--color-header); /* APLICADO: Azul pizarra oscuro */
+    padding: 15px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    z-index: 1;
+
+    box-shadow: 
+        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
+        inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+    margin-top: 0; 
+}
+
+.header h1 {
+    color: var(--color-border-accent); /* APLICADO: Título en dorado/bronce */
+    /* Resplandor suave para el título */
+    font-size: 1.3em;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 4px; 
+}
+
+/* Contenido Principal de la Pantalla */
+.game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; 
+    padding: 20px;
+    z-index: 1;
+}
+
+/* Texto de Instrucción General */
+.game-instruction {
+    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
+    font-size: 0.9em;
+    margin: 20px auto 30px auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+/* Contenedor de las Tarjetas */
+.cards-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Estilo de Tarjeta Individual (como elementos de un menú de juego) */
+.game-card {
+    background-color: var(--color-card-bg); /* APLICADO: Gris azulado medio (color de HUD) */
+    width: 250px;
+    height: 250px;
+    border: 4px solid var(--color-border-accent); /* APLICADO: Dorado viejo/bronce */
+    border-radius: 10px;
+    box-shadow: 8px 8px 0px 0px var(--color-text-dark),
+                0 0 15px 5px rgba(227, 180, 72, 0.5); /* Resplandor dorado/bronce */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    position: relative;
+}
+
+.game-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 10px 10px 0px 0px var(--color-text-dark),
+                0 0 25px 8px rgba(227, 180, 72, 0.7);
+}
+
+.game-card p {
+    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+.game-card .card-icon {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 5px rgba(240, 244, 248, 0.8)); /* Resplandor claro al icono */
+}
+
+.game-card .bottom-icon {
+    margin-top: 20px;
+}
+
+/* Estilo específico para la tarjeta "Próximamente" */
+.game-card.coming-soon {
+    background-color: rgba(65, 90, 119, 0.5); /* Tono más claro y transparente de la tarjeta */
+    box-shadow: 8px 8px 0px 0px var(--color-text-dark);
+    cursor: not-allowed;
+    justify-content: center;
+    border-color: #555; /* Borde más opaco */
+}
+
+.game-card.coming-soon:hover {
+    transform: none;
+    box-shadow: 8px 8px 0px 0px var(--color-text-dark);
+}
+
+.game-card.coming-soon p {
+    color: var(--color-coming-soon); /* APLICADO: Dorado viejo/bronce */
+    font-size: 1.3em;
+}
+
+
+/* 💡 Animación de parpadeo (usada para "PRÓXIMAMENTE") */
+@keyframes blink-animation {
+    50% { opacity: 0; }
+}
+.blink {
+    animation: blink-animation 1s steps(1, start) infinite;
+}
+
+/* Botón "Ver Tutorial" */
+.game-button {
+    background-color: var(--color-button-primary); /* APLICADO: Rojo de acción (o el color que elijas para START) */
+    color: var(--color-text-light); /* Texto claro en el botón */
+    text-shadow: 1px 1px #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.1em;
+    padding: 18px 50px;
+    border: 4px solid var(--color-text-dark);
+    border-radius: 8px; 
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.1s ease;
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.game-button:hover {
+    background-color: var(--color-button-primary-hover); 
+}
+
+.game-button:active {
+    box-shadow: 0px 0px 0px 0px var(--color-text-dark),
+                inset 0 0 0 rgba(0, 0, 0, 0.2);
+    top: 6px; 
+    left: 6px;
+}

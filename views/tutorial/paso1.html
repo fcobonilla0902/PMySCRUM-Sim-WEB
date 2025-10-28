@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMYSCURM - Tutorial</title>
+    <link rel="stylesheet" href="../../src/css/tutorial/paso1.css">
+</head>
+<body id="game-screen">
+
+    <div class="header tutorial-header"> 
+        <h1>Tutorial del Juego</h1>
+    </div>
+
+    <div class="game-content tutorial-content">
+
+    <div class="character-container">
+        <div class="character">
+            <img src="../../src/img/personaje.png" alt="Personaje Pixelado Guía" class="pixel-character-image">
+        </div>
+        <div class="dialog-bubble" id="dialog-bubble">
+            </div>
+    </div>
+
+        <div class="step-indicator">
+            <p class="step-label" id="step-label">Paso 1:</p>
+            <h2 class="step-title" id="step-title">Escoger Metodologia</h2>
+        </div>
+
+        <div class="tutorial-image-container">
+             <img src="../../src/img/paso1.png" alt="Metodología SCRUM vs PMBOK" class="tutorial-image" id="step-image">
+        </div>
+
+        <div class="navigation-controls">
+            <button class="game-button nav-button previous" id="prev-button" onclick="changeStep(-1)" disabled>&#9664;  Anterior</button>
+            <button class="game-button nav-button next" id="next-button" onclick="changeStep(1)">Siguiente &#9654;</button>
+        </div>
+    </div>
+
+    <script src="../../src/js/tutorial.js"></script>
+</body>
+</html>

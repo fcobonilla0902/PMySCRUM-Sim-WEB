@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMYSCRUM - Introducción al Escenario</title>
+    <link rel="stylesheet" href="../src/css/context.css">
+</head>
+
+<body id="game-screen">
+
+    <div class="header"> 
+        <h1 id="intro-title">Preparando Escenario...</h1>
+    </div>
+
+    <div class="decision-box" style="width: 80%; margin: 30px auto;">
+        
+        <h2 id="intro-scenario-name">Nombre del Proyecto: ...</h2>
+        <br><br>
+        <p id="intro-description">
+            Cargando la descripción del proyecto, el tipo de producto, 
+            el presupuesto inicial y la duración...
+        </p>
+        <br><br>
+        <div id="intro-continue-container">
+            <button id="start-sim-button" class="enter-button">COMENZAR SIMULACIÓN</button>
+        </div>
+        <br><br>
+        <div id="intro-back-container">
+            <button class="enter-button" onclick="location.href='simulacion_hub.html';">REGRESAR</button>
+        </div>
+    </div>
+    
+    </body>
+
+    <script src="../src/js/intro_proyecto.js" type="module"></script>
+</html>

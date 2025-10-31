@@ -1,11 +1,9 @@
-// model/Decision.js
-
 export class Decision {
     
     constructor(title, scenarioDescription) {
         this.title = title;
         this.scenarioDescription = scenarioDescription;
-        this.options = []; // Array de JS
+        this.options = []; // Array de JS para guardar las opciones
     }
 
     /**

@@ -149,6 +149,7 @@ body {
     text-align: right;
 }
 
+
 .progress-bar-container {
     flex-grow: 1;
     background-color: var(--color-text-dark);

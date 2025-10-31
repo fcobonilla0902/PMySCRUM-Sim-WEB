@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMYSCRUM - Simulación SCRUM</title>
+    <link rel="stylesheet" href="../src/css/prueba.css">
+</head>
+
+<body id="game-screen">
+
+    <div class="header"> 
+        <h1>Simulación SCRUM: Escenario 1</h1>
+    </div>
+
+    <div class="dashboard-content">
+
+        <div class="stats-container">
+            <div class="stat-block">
+                <br><br>
+                <div class="stat-label">TIEMPO</div> <br> 
+                <div class="stat-label">PRESUPUESTO</div> <br>
+                <div class="stat-label">CALIDAD</div> <br>
+                <div class="stat-label">MOTIVACIÓN</div> <br>
+                <div class="stat-bar-background">
+                    <div id="bar-tiempo" class="stat-bar-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="enter-button" onclick="location.href='views/intro.html';">CONTINUAR</button>
+            <br><br><br>
+
+        <div class="team-display-container">
+                <p class="stat-label">TU EQUIPO</p>
+                <img src="../src/img/personaje2.png" alt="Miembro del Equipo" class="team-member">
+                <img src="../src/img/personaje3.png" alt="Miembro del Equipo" class="team-member">
+                <img src="../src/img/personaje4.png" alt="Miembro del Equipo" class="team-member">
+            </div>
+
+        
+
+    </div>
+    
+    <script src="../js/scrum_game.js" type="module"></script>
+
+</body>
+</html>

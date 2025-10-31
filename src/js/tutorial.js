@@ -10,7 +10,7 @@ const tutorialSteps = [
         label: "Paso 2:",
         title: "¿Cómo Jugarlo?",
         instruction: "En base a las decisiones <br> del jugador se administrará el proyecto",
-        image: "" 
+        image: "../src/img/paso2.png" 
     },
     {
         label: "Paso 3:",
@@ -85,8 +85,8 @@ function updateStep(index) {
         // **IMPORTANTE:** Aquí se cambia la función del botón
         nextButton.onclick = () => {
              // Redirigir a la página del juego principal
-             console.log("¡Comenzando el Juego!");
-             // window.location.href = 'ruta_a_tu_juego_principal.html'; 
+            console.log("¡Comenzando el Juego!");
+            location.href = '../views/simulacion_hub.html';
         };
 
     } else {

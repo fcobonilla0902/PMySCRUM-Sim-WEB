@@ -25,6 +25,8 @@
     --color-button-primary: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
     --color-button-primary-hover: #3A5F90; 
     --color-coming-soon: #E3B448; /* Usamos el color de acento para que no choque */
+
+    zoom: 85%;
 }
 
 /* 👾 Efecto de escaneo y tipografía base de juego */

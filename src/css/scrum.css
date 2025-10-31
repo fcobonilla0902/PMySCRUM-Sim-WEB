@@ -1,37 +1,23 @@
-/*
- * VERIFICA ESTA SECCIÓN:
- * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
- * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
- * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
- */
+/* ================================================
+   ESTILOS BASE (Tus estilos)
+   ================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    /* Fondo y Base (Mazmorra y Leyenda) */
-    --color-background: #0D1B2A;      /* Azul medianoche muy oscuro */
-    --color-header: #1B263B;          /* Azul pizarra oscuro */
-    
-    /* Colores Principales de Aventura / Resalte */
-    --color-border-accent: #E3B448;   /* Dorado viejo/bronce */
-    --color-text-light: #F0F4F8;      /* Blanco/Gris claro para texto principal */
-    --color-text-dark: #000000;       /* Negro */
-    
-    /* Botón de Acción Principal (START) - Usaremos el Rojo de Alto Impacto */
-    --color-button-primary: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
-    --color-button-primary-hover: #3A5F90; 
+    --color-background: #0D1B2A;
+    --color-header: #1B263B;
+    --color-border-accent: #E3B448;
+    --color-text-light: #F0F4F8;
+    --color-text-dark: #000000;
+    --color-button-primary: #2A4870;
+    --color-button-primary-hover: #3A5F90;
 }
 
-.stat-label{
-    color: white;
-    padding-bottom: 2%;
-}
-
-/* 👾 Efecto de escaneo y tipografía base de juego */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: var(--color-background); /* APLICADO: Fondo oscuro */
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +26,6 @@ body {
     overflow: hidden; 
 }
 
-/* 📺 Simulación de pantalla CRT */
 #game-screen::after {
     content: '';
     position: absolute;
@@ -48,7 +33,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Añade el efecto de líneas de escaneo de TV antigua */
     background: repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.5),
@@ -60,88 +44,30 @@ body {
     opacity: 0.3;
 }
 
-/* Encabezado principal (Banner de Título) */
 .header {
     width: 100%;
-    background-color: var(--color-header); /* APLICADO: Azul pizarra oscuro */
+    background-color: var(--color-header);
     padding: 15px 0;
     text-align: center;
     box-sizing: border-box;
-    /* Borde grueso para parecer una marquesina de arcade */
-        border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    border-top: 10px solid var(--color-border-accent);
+    border-bottom: 10px solid var(--color-border-accent);
     z-index: 1;
-
-    box-shadow: 
-        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
-        inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
-    margin-top: 0; 
-    margin-top: 0; 
+    box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, 0.2), 
+                inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
 }
 
 .header h1 {
-    color: var(--color-border-accent); /* APLICADO: Color Dorado/Bronce para el título */
-    /* Aplica una sombra de texto con el color del acento */
+    color: var(--color-border-accent);
     font-size: 1.5em;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 5px;
 }
 
-/* Contenido Central */
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1; 
-    padding: 20px;
-}
-
-/* Contenedor de la Imagen */
-.logo-container {
-    margin: 20px 0;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Borde de estilo marco de juego */
-    border: 5px solid var(--color-border-accent); /* APLICADO: Dorado/Bronce */
-    box-shadow: 0 0 15px 5px var(--color-border-accent); /* APLICADO: Resplandor Dorado/Bronce */
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.logo-container img {
-    image-rendering: pixelated; 
-    max-width: 90%;
-    max-height: 90%;
-    display: block;
-}
-
-/* Texto de Instrucción */
-.instruction-text {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
-    text-shadow: 0 0 5px var(--color-text-light);
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-}
-
-/* 💡 Animación de parpadeo para el texto de instrucción */
-@keyframes blink-animation {
-    50% { opacity: 0; }
-}
-.blink {
-    animation: blink-animation 1s steps(1, start) infinite;
-}
-
-/* Botón "START" */
 .enter-button {
-    background-color: var(--color-button-primary); /* APLICADO: Rojo Fuego */
-    color: var(--color-text-light); /* APLICADO: Texto claro */
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
     text-shadow: 1px 1px var(--color-text-dark);
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2em;
@@ -151,45 +77,254 @@ body {
     cursor: pointer;
     text-decoration: none;
     transition: all 0.1s ease;
-    /* Efecto 3D de botón de arcade */
     box-shadow: 6px 6px 0px 0px var(--color-text-dark),
                 inset 0 -8px 0 rgba(0, 0, 0, 0.2);
     position: relative;
     top: 0;
     left: 0;
-    display: block;
-    margin: 20px auto;
-    align-self: center;
 }
-
 .enter-button:hover {
-    background-color: var(--color-button-primary-hover); /* APLICADO: Rojo en hover */
+    background-color: var(--color-button-primary-hover);
 }
-
 .enter-button:active {
-    /* Efecto de "presionado" al hacer click */
     box-shadow: 0px 0px 0px 0px var(--color-text-dark),
                 inset 0 0 0 rgba(0, 0, 0, 0.2);
     top: 6px;
     left: 6px;
 }
 
-/*
-================================================
-  ESTILOS DEL EQUIPO PIXEL ART
-================================================
-*/
+/* ================================================
+   NUEVOS ESTILOS DEL DASHBOARD
+   ================================================ */
+
+/* Contenido principal de 2 columnas */
+.dashboard-content {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 20px auto;
+    gap: 35px; /* Espacio entre columnas */
+    align-items: flex-start;
+}
+
+/* Columna 1: Stats y Equipo */
+.stats-and-team-container {
+    flex: 1; /* Ocupa 1/3 del espacio */
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espacio entre stats y equipo */
+}
+
+/* Columna 2: Tareas y Botón */
+.decision-main-area {
+    flex: 2; /* Ocupa 2/3 del espacio */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Estilos Columna 1 --- */
+
+.stats-display-container {
+    background-color: var(--color-header);
+    border: 4px solid var(--color-border-accent);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.stat-row:last-child {
+    margin-bottom: 0;
+}
+
+.stat-label {
+    color: var(--color-text-light);
+    font-size: 0.9em;
+    flex-basis: 150px;
+    flex-shrink: 0;
+    margin-right: 15px;
+    text-align: right;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    background-color: var(--color-text-dark);
+    border: 3px solid var(--color-border-accent);
+    height: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #4CAF50; /* Verde */
+    width: 100%; /* JS lo cambiará */
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+.progress-bar-value {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    text-shadow: 1px 1px 2px #000;
+    z-index: 1;
+}
+
 .team-display-container {
-    margin-top: 25px;
     padding: 15px;
-    background-color: var(--color-header); /* REUTILIZADO */
-    border: 4px solid var(--color-border-accent); /* REUTILIZADO */
+    background-color: var(--color-header);
+    border: 4px solid var(--color-border-accent);
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.team-display-container .stat-label {
+    text-align: center;
+    flex-basis: auto;
+    margin-bottom: 10px;
+    margin-right: 0;
+}
+.team-member {
+    image-rendering: pixelated;
+    width: 128px; /* Tamaño más razonable */
+    height: 128px;
+    margin: 0 8px;
+}
+
+/* --- Estilos Columna 2 --- */
+
+.tasks-and-days-container {
+    background-color: var(--color-header);
+    border: 4px solid var(--color-border-accent);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.task-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.task-box:last-child {
+    margin-bottom: 0;
+}
+.task-label {
+    font-size: 1.1em;
+    color: var(--color-text-light);
+}
+.task-value {
+    font-size: 1.1em;
+    color: var(--color-border-accent);
+}
+
+.continue-button-container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 5px solid var(--color-border-accent);
+    box-shadow: 0 0 15px 5px var(--color-border-accent);
+}
+
+/* ================================================
+   NUEVOS ESTILOS DEL MODAL DE DECISIÓN
+   ================================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.decision-box-modal {
+    width: 100%;
+    max-width: 900px;
+    min-height: 400px;
+    border: 5px solid var(--color-border-accent);
+    box-shadow: 0 0 15px 5px var(--color-border-accent);
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 30px;
+    color: var(--color-text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.decision-box-modal h2 {
+    color: var(--color-border-accent);
+    font-size: 1.3em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.decision-box-modal p {
+    font-size: 1em;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+#modal-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* Botón de opción (más pequeño que el 'enter-button') */
+.option-button {
+    /* Hereda mucho de .enter-button pero más pequeño */
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
+    text-shadow: 1px 1px var(--color-text-dark);
+    font-family: 'Press Start 2P', cursive;
+    border: 4px solid var(--color-text-dark);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 0;
+    left: 0;
+    
+    /* Cambios */
+    font-size: 0.9em;
+    padding: 15px;
+    text-align: left;
+}
+.option-button:hover {
+    background-color: var(--color-button-primary-hover);
+}
+.option-button:active {
+    box-shadow: 0px 0px 0px 0px var(--color-text-dark),
+                inset 0 0 0 rgba(0, 0, 0, 0.2);
+    top: 6px;
+    left: 6px;
+}
+
+#modal-consequence-text {
+    color: var(--color-border-accent);
+    font-size: 1.1em;
+    text-align: center;
+    min-height: 50px;
+    margin-top: 20px;
+}
+
+/* Contenedor para el botón 'Continuar' del modal */
+#modal-continue-container {
     text-align: center;
 }
 
-.team-member {
-    image-rendering: pixelated; /* Mantiene el look pixel art */
-    width: 300px;
-    height: 300px;
-    margin: 0 8px; /* Espacio entre los "monitos" */
+.hidden {
+    display: none !important;
 }

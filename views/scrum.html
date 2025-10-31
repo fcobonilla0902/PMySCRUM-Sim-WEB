@@ -10,39 +10,94 @@
 <body id="game-screen">
 
     <div class="header"> 
-        <h1>Simulación SCRUM: Escenario 1</h1>
+        <h1 id="scenario-title">SIMULACIÓN SCRUM: ESCENARIO 1</h1>
     </div>
 
     <div class="dashboard-content">
 
-        <div class="stats-container">
-            <div class="stat-block">
-                <br><br>
-                <div class="stat-label">TIEMPO</div> <br> 
-                <div class="stat-label">PRESUPUESTO</div> <br>
-                <div class="stat-label">CALIDAD</div> <br>
-                <div class="stat-label">MOTIVACIÓN</div> <br>
-                <div class="stat-bar-background">
-                    <div id="bar-tiempo" class="stat-bar-fill" style="width: 100%;"></div>
+        <div class="stats-and-team-container">
+            
+            <div class="stats-display-container">
+                
+                <div class="stat-row">
+                    <div class="stat-label">TIEMPO</div>
+                    <div class="progress-bar-container">
+                        <div id="bar-tiempo" class="progress-bar-fill"></div>
+                        <span id="value-tiempo" class="progress-bar-value">100%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-row">
+                    <div class="stat-label">PRESUPUESTO</div>
+                    <div class="progress-bar-container">
+                        <div id="bar-presupuesto" class="progress-bar-fill"></div>
+                        <span id="value-presupuesto" class="progress-bar-value">100%</span>
+                    </div>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">CALIDAD</div>
+                    <div class="progress-bar-container">
+                        <div id="bar-calidad" class="progress-bar-fill"></div>
+                        <span id="value-calidad" class="progress-bar-value">100%</span>
+                    </div>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-label">MOTIVACIÓN</div>
+                    <div class="progress-bar-container">
+                        <div id="bar-motivacion" class="progress-bar-fill"></div>
+                        <span id="value-motivacion" class="progress-bar-value">100%</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <button class="enter-button" onclick="location.href='views/intro.html';">CONTINUAR</button>
-            <br><br><br>
-
-        <div class="team-display-container">
+            <div class="team-display-container">
                 <p class="stat-label">TU EQUIPO</p>
-                <img src="../src/img/personaje2.png" alt="Miembro del Equipo" class="team-member">
-                <img src="../src/img/personaje3.png" alt="Miembro del Equipo" class="team-member">
-                <img src="../src/img/personaje4.png" alt="Miembro del Equipo" class="team-member">
+                <img src="../src/img/personaje2.png" alt="Miembro" class="team-member">
+                <img src="../src/img/personaje3.png" alt="Miembro" class="team-member">
+                <img src="../src/img/personaje4.png" alt="Miembro" class="team-member">
             </div>
 
-        
+        </div>
 
+        <div class="decision-main-area">
+            
+            <div class="tasks-and-days-container">
+                <div class="task-box">
+                    <span class="task-label">Tareas Restantes (Sprint 1):</span>
+                    <span id="task-count" class="task-value">--</span>
+                </div>
+                <div class="task-box">
+                    <span class="task-label">Día Actual:</span>
+                    <span id="day-count" class="task-value">- / -</span>
+                </div>
+            </div>
+            
+            <div class="continue-button-container">
+                <button id="mainContinueButton" class="enter-button">CONTINUAR DÍA</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="decision-modal" class="modal-overlay hidden">
+        <div class="decision-box-modal">
+            
+            <h2 id="modal-title">...</h2>
+            <p id="modal-scenario">...</p>
+            
+            <div id="modal-options-container">
+                </div>
+            
+            <p id="modal-consequence-text"></p>
+            
+            <button id="modal-continue-button" class="enter-button hidden">Continuar</button>
+        
+        </div>
     </div>
     
     <script src="../src/js/scrum_game.js" type="module"></script>
-
 </body>
 </html>

@@ -1,4 +1,3 @@
-/* 🚀 Importa la fuente "Press Start 2P" de Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -21,21 +20,36 @@
     
     --color-nav-button-prev: #7C8B99;     /* Nuevo: Gris Piedra/Plata para 'Anterior' */
     --color-nav-button-prev-hover: #607180; 
+
+    /* Nuevos colores para gamificación */
+    --color-progress: #2ecc71;
+    --color-xp: #f1c40f;
+    --color-time: #3498db;
+    --color-achievement: #e74c3c;
 }
 
-/* 👾 Base y CRT Effect */
+/* Base y CRT Effect */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive; 
-    background-color: var(--color-background); 
+    background: linear-gradient(135deg, #0D1B2A, #1B263B, #415A77);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
-    overflow: hidden; 
-    color: var(--color-text-light); 
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--color-text-light);
+    position: relative;
+}
+
+/* Partículas de fondo */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 /* Simulación de pantalla CRT - mantener */
@@ -55,30 +69,113 @@ body {
     );
     pointer-events: none; 
     opacity: 0.3;
-    z-index: 100;
+    z-index: 0;
 }
 
 /* Header */
 .header {
     width: 100%;
-    background-color: var(--color-header); /* Nuevo azul oscuro */
+    background-color: var(--color-header);
     padding: 20px 0;
     text-align: center;
     box-sizing: border-box;
-    border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    z-index: 1;
-
+    border-top: 10px solid var(--color-border-accent);
+    border-bottom: 10px solid var(--color-border-accent);
+    z-index: 2;
+    position: relative;
     box-shadow: 
-        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
+        inset 0 2px 0 0 rgba(0, 0, 0, 0.2),
         inset 0 -2px 0 0 rgba(0, 0, 0, 0.2); 
 }
 .header h1 {
-    color: var(--color-border-accent); /* Título dorado/bronce */
-    font-size: 1.5em; 
+    color: var(--color-border-accent);
+    font-size: 1.3em; 
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 4px; 
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Barra de progreso del tutorial */
+.tutorial-progress {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+    margin-bottom: 0;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.step-marker {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-border-accent);
+    border-radius: 50%;
+    background: var(--color-step-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.step-marker.active {
+    background: var(--color-border-accent);
+    color: var(--color-text-dark);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(227, 180, 72, 0.5);
+}
+
+.step-marker.completed {
+    background: var(--color-progress);
+    border-color: var(--color-progress);
+}
+
+.step-tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-step-bg);
+    color: var(--color-text-light);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.6em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.step-marker:hover .step-tooltip {
+    opacity: 1;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-progress), var(--color-border-accent));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
 }
 
 /* Contenido y Burbuja */
@@ -88,11 +185,11 @@ body {
     align-items: center;
     flex-grow: 1;
     padding: 20px;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
 }
-/* ... (tu sección :root se mantiene igual con los últimos colores de botones) ... */
-
-/* ... (tu sección :root se mantiene igual) ... */
 
 /* Personaje y Burbuja (Posición Fija a la derecha) */
 .character-container {
@@ -101,20 +198,19 @@ body {
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    /* Mantenemos column-reverse para que la burbuja esté visualmente encima */
     flex-direction: column-reverse; 
     align-items: center;
     z-index: 10;
-    gap: 15px; /* Espacio entre burbuja y personaje */
+    gap: 15px;
 }
 
-/* 🗣️ Burbuja de diálogo mejorada */
+/* Burbuja de diálogo mejorada */
 .dialog-bubble {
     background: linear-gradient(135deg, var(--color-step-bg), #3A506B);
     border: 4px solid var(--color-border-accent);
     border-radius: 20px;
-    padding: 20px;
-    max-width: 320px;
+    padding: 25px;
+    max-width: 350px;
     color: var(--color-text-light);
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8em;
@@ -122,137 +218,452 @@ body {
     text-align: center;
     position: relative;
     box-shadow: 
-        6px 6px 0px 0px rgba(0,0,0,0.3),
+        8px 8px 0px 0px rgba(0,0,0,0.3),
         inset 2px 2px 0px 0px rgba(255,255,255,0.1);
     text-shadow: 1px 1px 0px #000;
-    
-    /* Revertir ajustes de posición lateral */
-    margin-right: 0;
-    margin-bottom: 0; 
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Triángulo de la burbuja que apunta hacia abajo (contenido) */
+/* Indicador de escritura */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 10px;
+    opacity: 0;
+}
+
+.typing-indicator.active {
+    opacity: 1;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: var(--color-border-accent);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* Triángulo de la burbuja que apunta hacia abajo */
 .dialog-bubble::after {
     content: '';
     position: absolute;
-    /* Apunta hacia ABAJO, centrado */
     bottom: -20px; 
     left: 50%; 
-    transform: translateX(-50%); /* Centra horizontalmente */
-    
-    /* Configuración de la punta del triángulo */
-    border-top: 20px solid var(--color-step-bg); /* La base y el cuerpo de la flecha */
+    transform: translateX(-50%);
+    border-top: 20px solid var(--color-step-bg);
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 0; /* Elimina la línea inferior */
-    
-    z-index: 1; 
-    filter: none; /* Quitamos el filtro de sombra, usaremos el borde ::before */
+    border-bottom: 0;
+    z-index: 1;
 }
 
-/* Borde del Triángulo de la burbuja (marco) */
 .dialog-bubble::before {
     content: '';
     position: absolute;
-    /* Ligeramente más grande y más abajo que el 'after' */
     bottom: -24px; 
     left: 50%;
     transform: translateX(-50%);
-    
-    /* Configuración de la punta del triángulo (borde) */
-    border-top: 24px solid var(--color-border-accent); /* La base y el cuerpo del borde */
+    border-top: 24px solid var(--color-border-accent);
     border-left: 18px solid transparent;
     border-right: 18px solid transparent;
     border-bottom: 0; 
-    
-    z-index: 0; 
+    z-index: 0;
 }
 
-/* 🕹️ Panel de paso (HUD) */
+/* Panel de paso (HUD) */
 .step-indicator {
-    background-color: var(--color-step-bg); /* Gris azulado medio */
-    border: 3px solid var(--color-border-accent); /* Borde dorado/bronce */
-    padding: 15px 30px;
-    margin: 30px 0 20px 0;
-    text-align: left;
-    box-shadow: 4px 4px 0px 0px var(--color-text-dark); 
-    max-width: 390px;
-    border-radius: 35px;
+    background: linear-gradient(135deg, var(--color-step-bg), #3A506B);
+    border: 3px solid var(--color-border-accent);
+    padding: 20px 40px;
+    margin: 30px 0 25px 0;
+    text-align: center;
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark);
+    max-width: 450px;
+    border-radius: 20px;
+    position: relative;
+    margin-top: 0;
 }
 
 .step-label {
-    color: var(--color-step-label); /* Amarillo-Oro fuerte */
-    font-size: 0.8em;
-    margin-bottom: 5px !important;
+    color: var(--color-step-label);
+    font-size: 0.9em;
+    margin-bottom: 8px !important;
+    text-transform: uppercase;
 }
 
 .step-title {
     color: var(--color-text-light);
-    font-size: 1.1em;
+    font-size: 1.2em;
     text-transform: uppercase;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
-/* Imagen del tutorial */
+.step-badges {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.badge {
+    font-size: 0.6em;
+    padding: 6px 12px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.time-badge {
+    background: var(--color-time);
+    color: var(--color-text-light);
+}
+
+.xp-badge {
+    background: var(--color-xp);
+    color: var(--color-text-dark);
+}
+
+/* Imagen del tutorial mejorada */
 .tutorial-image-container {
-    margin: 15px 0;
-    border: 4px dashed var(--color-border-accent); /* Borde dorado/bronce */
-    padding: 10px;
+    margin: 10px 0;
+    position: relative;
 }
 
-/* ... (el resto del CSS del Header, Dialog-Bubble, Step-Indicator es el mismo) ... */
+.image-frame {
+    border: 4px solid var(--color-border-accent);
+    border-radius: 15px;
+    padding: 15px;
+    background: rgba(27, 38, 59, 0.8);
+    box-shadow: 0 0 30px rgba(227, 180, 72, 0.3);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-/* Botones de navegación */
+.image-frame:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 40px rgba(227, 180, 72, 0.5);
+}
+
+.image-frame:hover .image-overlay {
+    opacity: 1;
+}
+
+.tutorial-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 170px;
+    border-radius: 8px;
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.zoom-hint {
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.zoom-hint i {
+    font-size: 2em;
+    color: var(--color-border-accent);
+}
+
+/* Indicadores de imagen */
+.image-indicators {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: var(--color-border-accent);
+    transform: scale(1.2);
+}
+
+/* Botones de navegación mejorados */
 .navigation-controls {
     display: flex;
-    gap: 80px;
-    margin-top: 20px;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;
+    justify-content: space-between;
 }
 
 .game-button {
     font-family: 'Press Start 2P', cursive;
-    font-size: 1em;
-    padding: 15px 35px;
+    font-size: 0.9em;
+    padding: 15px 25px;
     border: 4px solid var(--color-text-dark);
-    border-radius: 8px; 
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.1s ease;
+    transition: all 0.2s ease;
     box-shadow: 4px 4px 0px 0px var(--color-text-dark);
     position: relative;
-    top: 0;
-    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    justify-content: center;
 }
 
 .nav-button.next {
-    /* Botón 'Siguiente' - Azul Zafiro Oscuro */
     background-color: var(--color-nav-button-next);
-    color: var(--color-text-light); /* Texto blanco para mejor contraste en fondo oscuro */
+    color: var(--color-text-light);
 }
 
 .nav-button.previous {
-    /* Botón 'Anterior' - Gris Piedra/Plata */
     background-color: var(--color-nav-button-prev);
-    color: var(--color-text-dark); /* Texto oscuro para mejor contraste en fondo claro/medio */
+    color: var(--color-text-dark);
 }
 
 .nav-button.next:hover {
     background-color: var(--color-nav-button-next-hover);
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark);
 }
 
 .nav-button.previous:hover {
-    background-color: var(--color-nav-button-prev-hover); 
+    background-color: var(--color-nav-button-prev-hover);
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark);
 }
 
 .game-button:active {
     box-shadow: 0px 0px 0px 0px var(--color-text-dark);
-    top: 4px;
-    left: 4px;
+    transform: translateY(4px);
 }
 
-/* ... (el resto del CSS del personaje es el mismo) ... */
+.game-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 4px 4px 0px 0px var(--color-text-dark);
+}
+
+/* Información de navegación */
+.nav-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-light);
+    font-size: 0.9em;
+}
+
+.current-step {
+    color: var(--color-border-accent);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.step-separator {
+    color: var(--color-text-light);
+    opacity: 0.7;
+}
+
+.total-steps {
+    color: var(--color-text-light);
+    opacity: 0.7;
+}
+
+/* Panel de consejos - POSICIONADO A LA IZQUIERDA */
+.tips-panel {
+    background: rgba(65, 90, 119, 0.8);
+    border: 2px solid var(--color-border-accent);
+    border-radius: 15px;
+    padding: 15px 20px;
+    max-width: 280px;
+    text-align: center;
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+.tips-panel.left-tips {
+    animation: panelSlideIn 0.5s ease-out;
+}
+
+@keyframes panelSlideIn {
+    from {
+        transform: translateY(-50%) translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+    }
+}
+
+.tips-title {
+    color: var(--color-border-accent);
+    font-size: 0.7em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tips-content {
+    color: var(--color-text-light);
+    font-size: 0.6em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Ajustes responsive para el panel izquierdo */
+@media (max-width: 768px) {
+    .tips-panel {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 20px auto;
+        max-width: 90%;
+    }
+    
+    .tips-panel.left-tips {
+        animation: none;
+    }
+}
+
+/* Popup de logro */
+.achievement-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, var(--color-step-bg), #3A506B);
+    border: 4px solid var(--color-border-accent);
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 0 40px var(--color-border-accent);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.achievement-popup.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.achievement-icon {
+    font-size: 3em;
+    color: var(--color-border-accent);
+}
+
+.achievement-content h4 {
+    color: var(--color-border-accent);
+    font-size: 1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.achievement-content p {
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    margin: 0;
+}
+
+/* Modal de imagen */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.image-modal.show {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border: 4px solid var(--color-border-accent);
+    border-radius: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: var(--color-text-light);
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--color-border-accent);
+}
 
 /* ======================================= */
-/* ===== PERSONAJE - VERSIÓN IMAGEN (Mantenida) ===== */
+/* ===== PERSONAJE - VERSIÓN MEJORADA ===== */
 /* ======================================= */
 
 .character {
@@ -273,11 +684,7 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%) scale(1.5); 
-    
-    /* Efecto de Flotar (Float) */
     animation: float 2.5s ease-in-out infinite;
-    
-    /* Efectos de Estilo */
     filter: drop-shadow(4px 4px 0 #000); 
     z-index: 2;
 }
@@ -294,6 +701,14 @@ body {
     filter: blur(3px);
     z-index: 1;
     animation: shadow-pulse 3s ease-in-out infinite;
+}
+
+/* Partículas del personaje */
+.character-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
 /* ANIMACIONES DE IMAGEN */
@@ -319,4 +734,55 @@ body {
     filter: drop-shadow(4px 4px 0 #000) brightness(1.1);
     transform: translateX(-50%) scale(1.52) translateY(-4px);
     transition: all 0.3s ease;
+}
+
+/* Efectos de sonido visuales */
+.sound-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(227, 180, 72, 0.3);
+    animation: soundWave 0.5s ease-out;
+}
+
+@keyframes soundWave {
+    to {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .character-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin-bottom: 20px;
+    }
+    
+    .navigation-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-button {
+        min-width: 200px;
+    }
+    
+    .dialog-bubble {
+        max-width: 280px;
+        font-size: 0.7em;
+    }
+    
+    .step-indicator {
+        max-width: 350px;
+        padding: 15px 25px;
+    }
 }

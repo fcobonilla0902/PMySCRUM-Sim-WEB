@@ -1,50 +1,49 @@
-// model/Project.js
 export class Project {
-    
-    // El constructor ahora toma los valores iniciales del escenario
     constructor(totalTareas, totalDias) {
         this.tiempo = 100;
-        this.costo = 100; // Presupuesto
+        this.costo = 100;
         this.calidad = 100;
         this.motivacion = 100;
         
         this.tareasRestantes = totalTareas;
+        this.totalTareas = totalTareas;
         this.currentDay = 1;
-        this.totalDays = totalDias; // Total de días (ej. 10)
+        this.totalDays = totalDias;
         this.currentSprint = 1;
     }
 
-    // Aplicar impacto ahora también acepta tareas completadas
-    aplicarImpacto(deltaTiempo, deltaCosto, deltaCalidad, deltaMotivacion, tareasCompletadas) {
+    aplicarImpacto(deltaTiempo, deltaCosto, deltaCalidad, deltaMotivacion) {
+        // SIEMPRE completar 1 tarea por decisión
         this.tiempo += deltaTiempo;
         this.costo += deltaCosto;
         this.calidad += deltaCalidad;
         this.motivacion += deltaMotivacion;
-        this.tareasRestantes -= tareasCompletadas; // Restamos las tareas
+        this.tareasRestantes -= 1; // ← SIEMPRE 1 TAREA POR DÍA
 
-        // ✅ LÓGICA DE LÍMITES (AÑADIDA)
+        // Límites - ASEGURAR que no sean negativos
+        this.tiempo = Math.max(0, Math.min(100, this.tiempo));
+        this.costo = Math.max(0, Math.min(100, this.costo));
         this.calidad = Math.max(0, Math.min(100, this.calidad));
         this.motivacion = Math.max(0, Math.min(100, this.motivacion));
-        this.tiempo = Math.max(0, Math.min(100, this.tiempo)); // Asumiendo que tiempo es un %
-        this.costo = Math.max(0, Math.min(100, this.costo));   // Asumiendo que presupuesto es un %
         this.tareasRestantes = Math.max(0, this.tareasRestantes);
     }
     
     avanzarDia() {
         this.currentDay++;
         if (this.currentDay > 5 && this.currentSprint === 1) {
-            this.currentSprint = 2; // Avanza al sprint 2
+            this.currentSprint = 2;
         }
     }
 
     isFailed() {
-        // ✅ LÓGICA DE FRACASO (AÑADIDA)
-        // Fracasa si el costo o calidad bajan mucho, o si se acaban los días y aún hay tareas
-        return this.costo <= 0 || this.calidad <= 30 || (this.currentDay > this.totalDays && this.tareasRestantes > 0);
+        return this.tiempo <= 15 ||           
+            this.costo <= 15 || 
+            this.calidad <= 15 ||          
+            this.motivacion <= 15 ||
+            (this.currentDay > this.totalDays && this.tareasRestantes > 0);
     }
 
     // --- Getters ---
-    // ✅ GETTERS PRINCIPALES (AÑADIDOS)
     getTiempo() { return this.tiempo; }
     getCosto() { return this.costo; }
     getCalidad() { return this.calidad; }
@@ -54,4 +53,5 @@ export class Project {
     getCurrentDay() { return this.currentDay; }
     getTotalDays() { return this.totalDays; }
     getCurrentSprint() { return this.currentSprint; }
+    getTotalTareas() { return this.totalTareas; }
 }

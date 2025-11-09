@@ -12,18 +12,31 @@
         <h1>PMYSCRUM Sim</h1>
     </div>
 
+    <!-- Efectos de partículas -->
+    <div id="particles-js"></div>
+
     <div class="content">
         <div class="logo-container">
-            <img src="src/img/Logo_1.png" alt="PMYSCURM Sim Logo">
+            <img src="src/img/Logo_1.png" alt="PMYSCURM Sim Logo" class="logo-pulse">
+            <div class="logo-glow"></div>
         </div>
 
         <p class="instruction-text blink">¡PULSA START PARA COMENZAR!</p>
 
-        <button class="enter-button" onclick="location.href='views/intro.html';">START</button>
+        <button class="enter-button" id="start-button">
+            <span class="button-text">START</span>
+            <div class="button-sparkle"></div>
+        </button>
+
+        <!-- Efectos de confeti -->
+        <div id="confetti-container"></div>
     </div>
+
     
     <audio id="miAudio" src="src/audio/Ruins.mp3" autoplay loop muted></audio>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="src/js/background_music.js" type="module"></script>
+    <script src="src/js/index.js" type="module"></script>
 </body>
 </html>

@@ -1,83 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMBOK información</title>
+    <title>PMBOK - Información</title>
     <link rel="stylesheet" href="../src/css/pmbok_info.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
+<body id="game-screen">
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+
     <div class="header"> 
-        <h1>PMBOK Información</h1>
+        <h1>PMBOK - GUÍA DEL AVENTURERO</h1>
+    </div>
+
+    <button class="back-button" onclick="location.href='teoria_hub.html';">
+        <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <!-- Barra de progreso de lectura -->
+    <div class="reading-progress">
+        <div class="progress-info">
+            <span class="progress-label">PROGRESO DE APRENDIZAJE</span>
+            <span class="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="reading-progress"></div>
+        </div>
     </div>
 
     <div class="content">
         <div class="info-container">
-            <h2>¿Qué es el PMBOK?</h2>
-            <p>El PMBOK (Project Management Body of Knowledge) es un conjunto de estándares y mejores prácticas para la gestión de proyectos, desarrollado por el Project Management Institute (PMI). Proporciona un marco estructurado que abarca diversas áreas de conocimiento y procesos esenciales para la planificación, ejecución, monitoreo y cierre de proyectos.</p>
-            
-            <h2>Áreas de Conocimiento del PMBOK</h2>
-            <ul>
-                <li>Gestión de la Integración del Proyecto</li>
-                <li>Gestión del Alcance del Proyecto</li>
-                <li>Gestión del Cronograma del Proyecto</li>
-                <li>Gestión de los Costos del Proyecto</li>
-                <li>Gestión de la Calidad del Proyecto</li>
-                <li>Gestión de los Recursos del Proyecto</li>
-                <li>Gestión de las Comunicaciones del Proyecto</li>
-                <li>Gestión de los Riesgos del Proyecto</li>
-                <li>Gestión de las Adquisiciones del Proyecto</li>
-                <li>Gestión de los Interesados del Proyecto</li>
-            </ul>
-            
-            <h2>Importancia del PMBOK</h2>
-            <p>El PMBOK es fundamental para los profesionales de la gestión de proyectos, ya que proporciona un lenguaje común y un conjunto de prácticas probadas que ayudan a mejorar la eficiencia y efectividad en la entrega de proyectos. Además, es una referencia clave para la certificación PMP (Project Management Professional).</p>
-            <br>
-            <h2>Sistema de entrega de valores</h2>
-            <p>El PMBOK promueve un enfoque basado en la entrega de valor, asegurando que los proyectos no solo se completen a tiempo y dentro del presupuesto, sino que también cumplan con los objetivos estratégicos y aporten beneficios tangibles a las organizaciones.</p>
-            <br>
-            <h2>Dominios de desempeño de un proyecto</h2>
-            <p>El PMBOK identifica varios dominios de desempeño clave que los gerentes de proyectos deben gestionar para asegurar el éxito del proyecto. Algunos de estos son: </p>
-            <ul>
-                    <li>Partes interesadas</li>
-                    <li>Equipo</li>
-                    <li>Ciclo de vida del proyecto</li>
-                    <li>Planificación</li>
-                    <li>Trabajo del proyecto</li>
-                    <li>Entrega</li>
-                    <li>Medición del desempeño</li>
-                    <li>Incertidumbre</li>
-            </ul>
-            <br>
-            <h2>Adaptación</h2>
-            <p>El PMBOK reconoce la necesidad de adaptar las prácticas de gestión de proyectos a diferentes contextos y entornos. Proporciona directrices para personalizar los procesos y herramientas según las características específicas del proyecto, la industria y la cultura organizacional.</p>
-            <br>
-            <h2>Modelos, métodos y artefactos</h2>
-            <p>El PMBOK incluye una variedad de modelos, métodos y artefactos que los gerentes de proyectos pueden utilizar para planificar, ejecutar y controlar sus proyectos. Estos incluyen diagramas de Gantt, matrices de riesgos, planes de comunicación, entre otros.</p>
-            <ol>
-                <li>Modelos: Representaciones simplificadas de procesos o sistemas que ayudan a comprender y gestionar proyectos. Ejemplos incluyen modelos de ciclo de vida del proyecto y modelos de madurez organizacional.</li>
-                <li>Métodos: Técnicas y enfoques específicos utilizados para llevar a cabo actividades de gestión de proyectos, como la estimación de costos, la gestión de riesgos y la planificación del cronograma.</li>
-                <li>Artefactos: Documentos y herramientas tangibles que se crean durante el ciclo de vida del proyecto, como el acta de constitución del proyecto, el plan de gestión del proyecto y los informes de estado.</li>
-            </ol>
-            <br>
-            <h2>Nuevo enfoque de PMBOK v.7</h2>
-            <p>El PMBOK séptima edición introduce un enfoque más flexible y adaptativo para la gestión de proyectos, centrándose en principios y dominios de desempeño en lugar de procesos prescriptivos. Este cambio refleja la evolución de la gestión de proyectos hacia metodologías ágiles y enfoques híbridos, permitiendo a los gerentes de proyectos seleccionar y adaptar prácticas según las necesidades específicas de sus proyectos.</p>
-            <br>
-            <h2>Tips para el manejo de PMBOK</h2>
-            <ul>
-                <li>Familiarízate con las áreas de conocimiento y procesos del PMBOK.</li>
-                <li>Adapta las prácticas del PMBOK a las necesidades específicas de tu proyecto.</li>
-                <li>Utiliza herramientas y artefactos recomendados para mejorar la gestión del proyecto.</li>
-                <li>Enfócate en la entrega de valor y beneficios para los interesados.</li>
-                <li>Mantente actualizado con las últimas ediciones y tendencias en gestión de proyectos.</li>
-            </ul>
+
+            <!-- Tarjeta 1 - Qué es PMBOK -->
+            <section class="card interactive-card" data-card="1">
+                <div class="card-header">
+                    <span class="card-badge basic">BÁSICO</span>
+                    <span class="card-xp">+5 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/libro.png" alt="Libro PMBOK" class="info-img floating">
+                    <h2>¿QUÉ ES EL PMBOK?</h2>
+                    <p>El <strong>PMBOK</strong> es una guía que reúne las mejores prácticas para dirigir proyectos. Es como el "manual del aventurero" en gestión de proyectos.</p>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 2 - Áreas Clave -->
+            <section class="card interactive-card" data-card="2">
+                <div class="card-header">
+                    <span class="card-badge intermediate">INTERMEDIO</span>
+                    <span class="card-xp">+10 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/conocimiento.png" alt="Áreas de conocimiento" class="info-img floating delayed">
+                    <h2>ÁREAS CLAVE DE CONOCIMIENTO</h2>
+                    <div class="knowledge-grid">
+                        <div class="knowledge-item">
+                            <i class="bi bi-clock"></i>
+                            <span>Tiempo ⏰</span>
+                        </div>
+                        <div class="knowledge-item">
+                            <i class="bi bi-coin"></i>
+                            <span>Costo 💰</span>
+                        </div>
+                        <div class="knowledge-item">
+                            <i class="bi bi-star"></i>
+                            <span>Calidad ⭐</span>
+                        </div>
+                        <div class="knowledge-item">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <span>Riesgos ⚠️</span>
+                        </div>
+                    </div>
+                    <p>Cada área ayuda a que el proyecto llegue a su meta sin perder el rumbo.</p>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 3 - Entrega de Valor -->
+            <section class="card interactive-card" data-card="3">
+                <div class="card-header">
+                    <span class="card-badge advanced">AVANZADO</span>
+                    <span class="card-xp">+15 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/valor.png" alt="Entrega de valor" class="info-img floating">
+                    <h2>ENTREGA DE VALOR</h2>
+                    <p>El PMBOK busca que los proyectos no solo se completen, sino que <strong>aporten beneficios reales</strong> al equipo y a la organización.</p>
+                    <div class="value-metrics">
+                        <div class="metric">
+                            <span class="metric-value">95%</span>
+                            <span class="metric-label">Satisfacción</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">88%</span>
+                            <span class="metric-label">Eficiencia</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">92%</span>
+                            <span class="metric-label">Calidad</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 4 - Adaptación -->
+            <section class="card interactive-card" data-card="4">
+                <div class="card-header">
+                    <span class="card-badge intermediate">INTERMEDIO</span>
+                    <span class="card-xp">+10 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/adaptacion.png" alt="Adaptación" class="info-img floating delayed">
+                    <h2>ADAPTACIÓN Y FLEXIBILIDAD</h2>
+                    <p>No todos los proyectos son iguales. El PMBOK permite ajustar sus métodos según el tipo de misión o contexto. ⚙️</p>
+                    <div class="adaptation-types">
+                        <span class="type-tag">Proyectos Pequeños</span>
+                        <span class="type-tag">Proyectos Grandes</span>
+                        <span class="type-tag">Proyectos Ágiles</span>
+                        <span class="type-tag">Proyectos Tradicionales</span>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 5 - PMBOK v7 -->
+            <section class="card interactive-card" data-card="5">
+                <div class="card-header">
+                    <span class="card-badge expert">EXPERTO</span>
+                    <span class="card-xp">+20 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/libro.png" alt="PMBOK 7" class="info-img floating">
+                    <h2>PMBOK v7 - LA EVOLUCIÓN</h2>
+                    <p>La nueva versión se centra en <strong>principios y resultados</strong> más que en procesos. Ideal para combinar métodos ágiles y tradicionales.</p>
+                    <div class="version-comparison">
+                        <div class="version-old">
+                            <h4>VERSIONES ANTERIORES</h4>
+                            <ul>
+                                <li>Enfoque en procesos</li>
+                                <li>Estructura rígida</li>
+                                <li>Documentación extensa</li>
+                            </ul>
+                        </div>
+                        <div class="version-new">
+                            <h4>PMBOK v7</h4>
+                            <ul>
+                                <li>Enfoque en principios</li>
+                                <li>Flexibilidad adaptativa</li>
+                                <li>Resultados sobre procesos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Sección de personajes mejorada -->
+            <section class="character-dialogue">
+                <div class="characters-container">
+                    <div class="character-wrapper">
+                        <img src="../src/img/personaje.png" alt="Guía del jugador" class="character floating">
+                        <div class="character-name">Mentor PMBOK</div>
+                    </div>
+                    <div class="character-wrapper">
+                        <img src="../src/img/personaje2.png" alt="Guía del jugador" class="character floating delayed">
+                        <div class="character-name">Experto en Áreas</div>
+                    </div>
+                    <div class="character-wrapper">
+                        <img src="../src/img/personaje3.png" alt="Guía del jugador" class="character floating">
+                        <div class="character-name">Especialista v7</div>
+                    </div>
+                    <div class="character-wrapper">
+                        <img src="../src/img/personaje4.png" alt="Guía del jugador" class="character floating delayed">
+                        <div class="character-name">Coach Adaptativo</div>
+                    </div>
+                </div>
+                <div class="speech-bubble">
+                    <div class="speech-content" id="speech-content">
+                        ¡Bienvenido, aventurero! Haz clic en las tarjetas para descubrir los secretos del PMBOK.
+                    </div>
+                    <div class="speech-actions">
+                        <button class="speech-button" id="next-tip">
+                            <i class="bi bi-arrow-right"></i>
+                            SIGUIENTE CONSEJO
+                        </button>
+                    </div>
+                </div>
+            </section>
+
         </div>
+
+        <!-- Panel de logros -->
+        <div class="achievements-panel">
+            <h3 class="panel-title">
+                <i class="bi bi-trophy"></i>
+                LOGROS PMBOK
+            </h3>
+            <div class="achievements-grid">
+                <div class="achievement unlocked">
+                    <i class="bi bi-book"></i>
+                    <span>Primera Lectura</span>
+                    <span class="achievement-xp">+5 XP</span>
+                </div>
+                <div class="achievement locked">
+                    <i class="bi bi-puzzle"></i>
+                    <span>Dominio de Áreas</span>
+                    <span class="achievement-xp">+15 XP</span>
+                </div>
+                <div class="achievement locked">
+                    <i class="bi bi-star"></i>
+                    <span>Experto PMBOK</span>
+                    <span class="achievement-xp">+30 XP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de acción principal -->
+        <button class="game-button primary-action" id="complete-module">
+            <i class="bi bi-flag"></i>
+            COMPLETAR MÓDULO PMBOK
+            <span class="xp-bonus">+50 XP</span>
+        </button>
     </div>
-    <br>
-    <button class="game-button" onclick="location.href='teoria_hub.html'">Regresar</button>
-    <br><br><br><br>
+
+
     <audio id="miAudio" src="../src/audio/Ruins.mp3" autoplay loop muted></audio>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../src/js/pmbok_info.js" type="module"></script>
     <script src="../src/js/background_music.js" type="module"></script>
 </body>
 </html>

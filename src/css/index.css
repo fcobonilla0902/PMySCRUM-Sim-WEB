@@ -1,41 +1,43 @@
-/*
- * VERIFICA ESTA SECCIÓN:
- * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
- * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
- * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    /* Fondo y Base (Mazmorra y Leyenda) */
-    --color-background: #0D1B2A;      /* Azul medianoche muy oscuro */
-    --color-header: #1B263B;          /* Azul pizarra oscuro */
-    
-    /* Colores Principales de Aventura / Resalte */
-    --color-border-accent: #E3B448;   /* Dorado viejo/bronce */
-    --color-text-light: #F0F4F8;      /* Blanco/Gris claro para texto principal */
-    --color-text-dark: #000000;       /* Negro */
-    
-    /* Botón de Acción Principal (START) - Usaremos el Rojo de Alto Impacto */
-    --color-button-primary: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
-    --color-button-primary-hover: #3A5F90; 
+    --color-background: #0D1B2A;
+    --color-header: #1B263B;
+    --color-border-accent: #E3B448;
+    --color-text-light: #F0F4F8;
+    --color-text-dark: #000000;
+    --color-button-primary: #2A4870;
+    --color-button-primary-hover: #3A5F90;
+    --color-xp: #FFD700;
+    --color-level: #FF6B6B;
 }
 
-/* 👾 Efecto de escaneo y tipografía base de juego */
+/* Efecto de escaneo y tipografía base de juego */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: var(--color-background); /* APLICADO: Fondo oscuro */
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     height: 100vh;
-    overflow: hidden; 
+    overflow: hidden;
+    position: relative;
 }
 
-/* 📺 Simulación de pantalla CRT */
+/* Partículas de fondo */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Simulación de pantalla CRT */
 #game-screen::after {
     content: '';
     position: absolute;
@@ -43,7 +45,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Añade el efecto de líneas de escaneo de TV antigua */
     background: repeating-linear-gradient(
         0deg,
         rgba(0, 0, 0, 0.5),
@@ -53,34 +54,30 @@ body {
     );
     pointer-events: none;
     opacity: 0.3;
+    z-index: 1;
 }
 
-/* Encabezado principal (Banner de Título) */
+/* Encabezado principal */
 .header {
     width: 100%;
-    background-color: var(--color-header); /* APLICADO: Azul pizarra oscuro */
+    background-color: var(--color-header);
     padding: 15px 0;
     text-align: center;
     box-sizing: border-box;
-    /* Borde grueso para parecer una marquesina de arcade */
-        border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    z-index: 1;
-
-    box-shadow: 
-        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
-        inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
-    margin-top: 0; 
-    margin-top: 0; 
+    border-top: 10px solid var(--color-border-accent);
+    border-bottom: 10px solid var(--color-border-accent);
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .header h1 {
-    color: var(--color-border-accent); /* APLICADO: Color Dorado/Bronce para el título */
-    /* Aplica una sombra de texto con el color del acento */
+    color: var(--color-border-accent);
     font-size: 1.5em;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(227, 180, 72, 0.5);
 }
 
 /* Contenido Central */
@@ -89,11 +86,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; 
+    flex-grow: 1;
     padding: 20px;
+    position: relative;
+    z-index: 2;
 }
 
-/* Contenedor de la Imagen */
+/* Contenedor de la Imagen con efectos */
 .logo-container {
     margin: 20px 0;
     width: 300px;
@@ -101,22 +100,70 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Borde de estilo marco de juego */
-    border: 5px solid var(--color-border-accent); /* APLICADO: Dorado/Bronce */
-    box-shadow: 0 0 15px 5px var(--color-border-accent); /* APLICADO: Resplandor Dorado/Bronce */
+    border: 5px solid var(--color-border-accent);
+    box-shadow: 0 0 15px 5px var(--color-border-accent);
     background-color: rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
 }
 
-.logo-container img {
-    image-rendering: pixelated; 
+.logo-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(227, 180, 72, 0.1),
+        transparent
+    );
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.logo-pulse {
+    image-rendering: pixelated;
     max-width: 90%;
     max-height: 90%;
     display: block;
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.logo-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 30%,
+        rgba(227, 180, 72, 0.1) 70%,
+        transparent 100%
+    );
+    animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    from { opacity: 0.3; }
+    to { opacity: 0.7; }
 }
 
 /* Texto de Instrucción */
 .instruction-text {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
+    color: var(--color-text-light);
     text-shadow: 0 0 5px var(--color-text-light);
     font-size: 1.2em;
     margin-bottom: 20px;
@@ -125,7 +172,135 @@ body {
     text-align: center;
 }
 
-/* 💡 Animación de parpadeo para el texto de instrucción */
+/* Stats del jugador */
+.player-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    background: rgba(27, 38, 59, 0.8);
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid var(--color-border-accent);
+    box-shadow: 0 0 10px rgba(227, 180, 72, 0.3);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    color: var(--color-text-light);
+    font-size: 0.7em;
+    opacity: 0.8;
+}
+
+.stat-value {
+    color: var(--color-xp);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.stat-value#player-level {
+    color: var(--color-level);
+}
+
+/* Botón "START" */
+.enter-button {
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
+    text-shadow: 1px 1px var(--color-text-dark);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2em;
+    padding: 20px 60px;
+    border: 4px solid var(--color-text-dark);
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.1s ease;
+    box-shadow: 6px 6px 0px 0px var(--color-text-dark),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.enter-button:hover {
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 8px 8px 0px 0px var(--color-text-dark),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.enter-button:active {
+    box-shadow: 0px 0px 0px 0px var(--color-text-dark),
+                inset 0 0 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(6px);
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+.button-sparkle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.enter-button:hover .button-sparkle {
+    transform: translateX(100%);
+}
+
+/* Confeti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--color-border-accent);
+    opacity: 0;
+    animation: confettiFall 3s ease-in forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Efectos de partículas personalizadas */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-border-accent);
+    border-radius: 50%;
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* 💡 Animación de parpadeo */
 @keyframes blink-animation {
     50% { opacity: 0; }
 }
@@ -133,35 +308,55 @@ body {
     animation: blink-animation 1s steps(1, start) infinite;
 }
 
-/* Botón "START" */
-.enter-button {
-    background-color: var(--color-button-primary); /* APLICADO: Rojo Fuego */
-    color: var(--color-text-light); /* APLICADO: Texto claro */
-    text-shadow: 1px 1px var(--color-text-dark);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.2em;
-    padding: 20px 60px;
-    border: 4px solid var(--color-text-dark);
-    border-radius: 10px; 
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.1s ease;
-    /* Efecto 3D de botón de arcade */
-    box-shadow: 6px 6px 0px 0px var(--color-text-dark),
-                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
-    position: relative;
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1em;
+    }
+    
+    .logo-container {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .instruction-text {
+        font-size: 0.9em;
+    }
+    
+    .enter-button {
+        font-size: 1em;
+        padding: 15px 40px;
+    }
+}
+
+/* Contenedor de confeti */
+#confetti-container {
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
 }
 
-.enter-button:hover {
-    background-color: var(--color-button-primary-hover); /* APLICADO: Rojo en hover */
+/* Confeti individual */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--color-border-accent);
+    opacity: 0;
+    animation: confettiFall 3s ease-in forwards;
 }
 
-.enter-button:active {
-    /* Efecto de "presionado" al hacer click */
-    box-shadow: 0px 0px 0px 0px var(--color-text-dark),
-                inset 0 0 0 rgba(0, 0, 0, 0.2);
-    top: 6px;
-    left: 6px;
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
 }

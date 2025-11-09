@@ -5,36 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMYSCRUM - Introducción al Escenario</title>
     <link rel="stylesheet" href="../src/css/context.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body id="game-screen">
+    <div id="particles-js"></div>
+
+    <button class="back-button" onclick="location.href='simulacion_hub.php';">
+        <i class="bi bi-arrow-left"></i>
+    </button>
 
     <div class="header"> 
         <h1 id="intro-title">Preparando Escenario...</h1>
     </div>
 
-    <div class="decision-box" style="width: 80%; margin: 30px auto;">
-        
+    <div class="decision-box fade-in">
         <h2 id="intro-scenario-name">Nombre del Proyecto: ...</h2>
-        <br><br>
+        
+        <div class="progress-container">
+            <div class="progress-item">
+                <i class="bi bi-clock" style="font-size: 2rem;"></i>
+                <p>Duración</p>
+                <div class="progress-value" id="duration-value">...</div>
+            </div>
+            <div class="progress-item">
+                <i class="bi bi-cash-coin" style="font-size: 2rem;"></i>
+                <p>Presupuesto</p>
+                <div class="progress-value" id="budget-value">...</div>
+            </div>
+            <div class="progress-item">
+                <i class="bi bi-list-task" style="font-size: 2rem;"></i>
+                <p>Tareas</p>
+                <div class="progress-value" id="tasks-value">...</div>
+            </div>
+        </div>
+        
         <p id="intro-description">
             Cargando la descripción del proyecto, el tipo de producto, 
             el presupuesto inicial y la duración...
         </p>
-        <br><br>
+        
         <div id="intro-continue-container">
             <button id="start-sim-button" class="enter-button">COMENZAR SIMULACIÓN</button>
-        </div>
-        <br><br>
-        <div id="intro-back-container">
-            <button class="enter-button" onclick="location.href='simulacion_hub.html';">REGRESAR</button>
         </div>
     </div>
 
     <audio id="miAudio" src="../src/audio/Ruins.mp3" autoplay loop muted></audio>
     
-    </body>
-
-    <script src="../src/js/intro_proyecto.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../src/js/background_music.js" type="module"></script>
+    <script src="../src/js/intro_proyecto.js" type="module"></script>
+    
+</body>
 </html>

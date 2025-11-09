@@ -1,9 +1,3 @@
-/*
- * VERIFICA ESTA SECCIÓN:
- * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
- * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
- * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -19,23 +13,28 @@
     /* Botón de Acción Principal (START) - Usaremos el Rojo de Alto Impacto */
     --color-button-primary: #2A4870;     /* Nuevo: Azul Zafiro Oscuro para 'Siguiente' */
     --color-button-primary-hover: #3A5F90; 
+    --color-card-bg: #415A77;
 }
 
-/* 👾 Efecto de escaneo y tipografía base de juego */
+/* Efecto de escaneo y tipografía base de juego */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: var(--color-background); /* APLICADO: Fondo oscuro */
+    background: linear-gradient(135deg, #0D1B2A, #1B263B, #415A77);
+    color: var(--color-text-light);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
-    overflow: hidden; 
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* 📺 Simulación de pantalla CRT */
+
+
+/* Simulación de pantalla CRT */
 #game-screen::after {
     content: '';
     position: absolute;
@@ -53,6 +52,41 @@ body {
     );
     pointer-events: none;
     opacity: 0.3;
+    z-index: -1;
+}
+
+/* Partículas de fondo */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+/* Botón de regreso */
+.back-button {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid var(--color-border-accent);
+    background-color: var(--color-card-bg);
+    color: var(--color-text-light);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #000;
+    transition: all 0.2s ease-in-out;
+    z-index: 1000; /* Muy alto para que esté por encima de todo */
+}
+
+.back-button:hover {
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-3px);
 }
 
 /* Encabezado principal (Banner de Título) */
@@ -63,86 +97,132 @@ body {
     text-align: center;
     box-sizing: border-box;
     /* Borde grueso para parecer una marquesina de arcade */
-        border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
+    border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
     border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
     z-index: 1;
-
     box-shadow: 
-        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
+        inset 0 2px 0 0 rgba(0, 0, 0, 0.2),
         inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
-    margin-top: 0; 
-    margin-top: 0; 
+    margin-top: 0;
 }
 
 .header h1 {
-    color: var(--color-border-accent); /* APLICADO: Color Dorado/Bronce para el título */
+    color: var(--color-border-accent);
     /* Aplica una sombra de texto con el color del acento */
     font-size: 1.5em;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenido Central */
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1; 
-    padding: 20px;
+/* Caja de decisiones */
+.decision-box {
+    background: rgba(27, 38, 59, 0.8);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px auto;
+    width: 85%;
+    max-width: 900px;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 5px var(--color-border-accent);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
-/* Contenedor de la Imagen */
-.logo-container {
-    margin: 20px 0;
-    width: 300px;
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Borde de estilo marco de juego */
-    border: 5px solid var(--color-border-accent); /* APLICADO: Dorado/Bronce */
-    box-shadow: 0 0 15px 5px var(--color-border-accent); /* APLICADO: Resplandor Dorado/Bronce */
-    background-color: rgba(0, 0, 0, 0.8);
+.decision-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 5px var(--color-border-accent);
 }
 
-.logo-container img {
-    image-rendering: pixelated; 
-    max-width: 90%;
-    max-height: 90%;
-    display: block;
-}
-
-/* Texto de Instrucción */
-.instruction-text {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
-    text-shadow: 0 0 5px var(--color-text-light);
-    font-size: 1.2em;
+#intro-scenario-name {
+    color: var(--color-border-accent);
+    font-size: 1.3em;
     margin-bottom: 20px;
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(227, 180, 72, 0.5);
+}
+
+#intro-description {
+    color: var(--color-text-light);
+    font-size: 0.9em;
+    margin-top: 20px;
+    text-align: justify;
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-border-accent);
+}
+
+/* Indicadores de progreso */
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.progress-item {
     text-align: center;
+    flex: 1;
+    padding: 15px;
+    background: rgba(65, 90, 119, 0.6);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--color-border-accent);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* 💡 Animación de parpadeo para el texto de instrucción */
-@keyframes blink-animation {
-    50% { opacity: 0; }
-}
-.blink {
-    animation: blink-animation 1s steps(1, start) infinite;
+.progress-item:hover {
+    background: rgba(65, 90, 119, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* Botón "START" */
+.progress-item i {
+    color: var(--color-border-accent);
+    margin-bottom: 10px;
+}
+
+.progress-item p {
+    color: var(--color-text-light);
+    font-size: 0.7em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.progress-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #4cd964;
+    text-shadow: 0 0 5px rgba(76, 217, 100, 0.5);
+}
+
+/* Botón de comenzar */
+#intro-continue-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
 .enter-button {
-    background-color: var(--color-button-primary); /* APLICADO: Rojo Fuego */
-    color: var(--color-text-light); /* APLICADO: Texto claro */
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
     text-shadow: 1px 1px var(--color-text-dark);
     font-family: 'Press Start 2P', cursive;
-    font-size: 1.2em;
+    font-size: 1em;
     padding: 20px 60px;
     border: 4px solid var(--color-text-dark);
-    border-radius: 10px; 
+    border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.1s ease;
@@ -154,10 +234,14 @@ body {
     left: 0;
     margin: 0 auto;
     display: block;
+    overflow: hidden;
 }
 
 .enter-button:hover {
-    background-color: var(--color-button-primary-hover); /* APLICADO: Rojo en hover */
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0px 0px var(--color-text-dark),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .enter-button:active {
@@ -168,19 +252,125 @@ body {
     left: 6px;
 }
 
-#intro-scenario-name {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
-    font-size: 20px;
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
+.enter-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
 }
 
-#intro-description {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
-    font-size: 16px;
-    margin-top: 20px;
-    text-align: justify;
-    line-height: 1.5;
+.enter-button:hover::after {
+    left: 100%;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* Efecto de máquina de escribir */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--color-border-accent);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--color-border-accent) }
+}
+
+/* Animación de spinner */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 💡 Animación de parpadeo para el texto de instrucción */
+@keyframes blink-animation {
+    50% { opacity: 0; }
+}
+.blink {
+    animation: blink-animation 1s steps(1, start) infinite;
+}
+
+/* Animación de pulso para botones */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 1s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .decision-box {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.2em;
+    }
+    
+    #intro-scenario-name {
+        font-size: 1.1em;
+    }
+    
+    #intro-description {
+        font-size: 0.8em;
+    }
+    
+    .progress-container {
+        flex-direction: column;
+    }
+    
+    .progress-item {
+        margin: 10px 0;
+    }
+    
+    .enter-button {
+        font-size: 0.9em;
+        padding: 15px 40px;
+    }
+    
+    .back-button {
+        top: 80px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Efectos de partículas personalizados para tema retro */
+/* Estas clases se aplicarán mediante JavaScript */
+.particle-retro {
+    background-color: var(--color-border-accent);
+}
+
+.particle-accent {
+    background-color: var(--color-button-primary);
 }

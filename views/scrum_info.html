@@ -1,82 +1,362 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrum - Información</title>
     <link rel="stylesheet" href="../src/css/scrum_info.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
+<body id="game-screen">
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+
     <div class="header"> 
-        <h1>Scrum Información</h1>
+        <h1>SCRUM - MÁSTER ÁGIL</h1>
+    </div>
+
+    <button class="back-button" onclick="location.href='teoria_hub.html';">
+        <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <!-- Barra de progreso de aprendizaje -->
+    <div class="learning-progress">
+        <div class="progress-info">
+            <span class="progress-label">PROGRESO SCRUM MASTER</span>
+            <span class="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="scrum-progress"></div>
+        </div>
     </div>
 
     <div class="content">
         <div class="info-container">
-            <h2>¿Qué es SCRUM?</h2>
-            <p>Scrum es un marco de trabajo ágil utilizado para la gestión y desarrollo de proyectos, especialmente en el ámbito del software. Se basa en principios de colaboración, adaptabilidad y entrega incremental de valor. Scrum se estructura en torno a roles, eventos y artefactos específicos que facilitan la organización y ejecución del trabajo en equipo.</p>
-            <br>
-            <h2>Fundamentos de SCRUM y Agile</h2>
-            <p>Scrum es una metodología ágil que se centra en la entrega rápida y continua de productos funcionales a través de iteraciones cortas llamadas sprints. Agile, por otro lado, es un conjunto de principios y valores que promueven la flexibilidad, la colaboración y la respuesta rápida al cambio en el desarrollo de software. Scrum implementa estos principios mediante prácticas específicas que fomentan la transparencia, la inspección y la adaptación.</p>
-            <h2>Roles en SCRUM</h2>
-            <ul>
-                <li><strong>Product Owner:</strong> Responsable de definir y priorizar las características del producto en el backlog.</li>
-                <li><strong>Scrum Master:</strong> Facilita el proceso Scrum, elimina impedimentos y asegura que el equipo siga las prácticas ágiles.</li>
-                <li><strong>Equipo de Desarrollo:</strong> Grupo multifuncional que trabaja en la creación del producto durante los sprints.</li>
-            </ul>
-            <br>
-            <h2>¿Qué es un sprint?</h2>
-            <p>Un sprint es un período de tiempo fijo, generalmente de 2 a 4 semanas, durante el cual un equipo Scrum trabaja para completar un conjunto específico de tareas o historias de usuario del backlog del producto. Al final de cada sprint, se espera que el equipo entregue un incremento funcional del producto que pueda ser revisado y evaluado.</p>
-            <br>
-            <h2>Eventos en SCRUM</h2>
-            <ul>
-                <li><strong>Sprint:</strong> Iteración de trabajo de duración fija (generalmente 2-4 semanas) en la que se desarrolla un incremento del producto.</li>
-                <li><strong>Planificación del Sprint:</strong> Reunión donde se define el objetivo del sprint y se seleccionan los elementos del backlog a trabajar.</li>
-                <li><strong>Daily Scrum:</strong> Reunión diaria de 15 minutos para sincronizar el trabajo y planificar las próximas 24 horas.</li>
-                <li><strong>Revisión del Sprint:</strong> Reunión al final del sprint para presentar el trabajo completado y obtener retroalimentación.</li>
-                <li><strong>Retrospectiva del Sprint:</strong> Reunión para reflexionar sobre el sprint pasado y mejorar procesos y prácticas.</li>
-            </ul>
-            <h2>Artefactos en SCRUM</h2>
-            <ul>
-                <li><strong>Product Backlog:</strong> Lista priorizada de todas las características, mejoras y correcciones necesarias para el producto.</li>
-                <li><strong>Sprint Backlog:</strong> Conjunto de elementos del product backlog seleccionados para el sprint actual, junto con un plan para entregarlos.</li>
-                <li><strong>Incremento:</strong> Suma de todos los elementos del product backlog completados durante un sprint y los sprints anteriores, que debe estar en condiciones utilizables.</li>
-            </ul>
-            <h2>Beneficios de SCRUM</h2>
-            <ul>
-                <li>Mayor flexibilidad y adaptabilidad a los cambios.</li>
-                <li>Entrega continua de valor al cliente.</li>
-                <li>Mejora de la colaboración y comunicación dentro del equipo.</li>
-                <li>Identificación temprana de problemas y obstáculos.</li>
-                <li>Fomento de la autoorganización y responsabilidad del equipo.</li>
-            </ul>
-            <h2>Tablero Kanban y su utilidad en Agile</h2>
-            <p>El tablero Kanban es una herramienta visual utilizada en metodologías ágiles para gestionar y optimizar el flujo de trabajo. Consiste en un tablero dividido en columnas que representan las diferentes etapas del proceso de trabajo, como "Por hacer", "En progreso" y "Hecho". Las tareas o historias de usuario se representan mediante tarjetas que se mueven a través de las columnas a medida que avanzan en el proceso.</p>
-            <p>El uso del tablero Kanban en Agile permite a los equipos visualizar el estado de las tareas, identificar cuellos de botella y mejorar la eficiencia del flujo de trabajo. Además, fomenta la transparencia y la colaboración, ya que todos los miembros del equipo pueden ver el progreso y contribuir a la gestión del trabajo.</p>
-            <br>
-            <h2>Refinamiento del Product Backlog</h2>
-            <p>El refinamiento del Product Backlog es un proceso continuo en Scrum donde el Product Owner y el equipo de desarrollo revisan y actualizan regularmente los elementos del backlog. Durante este proceso, se clarifican los requisitos, se descomponen las historias de usuario en tareas más pequeñas, se estiman los esfuerzos necesarios y se priorizan los elementos según su valor para el cliente y la viabilidad técnica.</p>
-            <p>El objetivo del refinamiento es asegurar que el Product Backlog esté siempre actualizado y listo para la planificación de futuros sprints, facilitando una mejor comprensión y preparación del trabajo a realizar.</p>
-            
-            <h2>Tips para el manejo de SCRUM</h2>
-            <ul>
-                <li>Fomenta la comunicación abierta y frecuente entre los miembros del equipo.</li>
-                <li>Realiza reuniones diarias efectivas y concisas.</li>
-                <li>Prioriza el trabajo en función del valor para el cliente.</li>
-                <li>Utiliza herramientas visuales como tableros Kanban para gestionar el flujo de trabajo.</li>
-                <li>Involucra al Product Owner en todas las etapas del proceso Scrum.</li>
-                <li>Realiza retrospectivas regulares para identificar áreas de mejora.</li>
-                <li>Fomenta la autoorganización y la responsabilidad dentro del equipo.</li>
-            </ul>
+
+            <!-- Tarjeta 1 - Qué es Scrum -->
+            <section class="card interactive-card" data-card="1">
+                <div class="card-header">
+                    <span class="card-badge basic">FUNDAMENTOS</span>
+                    <span class="card-xp">+5 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/equipo.png" alt="Equipo Scrum" class="info-img floating">
+                    <h2>¿QUÉ ES SCRUM?</h2>
+                    <p>Scrum es un marco de trabajo ágil que organiza el desarrollo en ciclos cortos llamados <strong>sprints</strong>, fomentando la colaboración, mejora continua y entrega rápida de valor.</p>
+                    <div class="scrum-pillars">
+                        <div class="pillar">
+                            <i class="bi bi-eye"></i>
+                            <span>Transparencia</span>
+                        </div>
+                        <div class="pillar">
+                            <i class="bi bi-search"></i>
+                            <span>Inspección</span>
+                        </div>
+                        <div class="pillar">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span>Adaptación</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 2 - Roles en Scrum -->
+            <section class="card interactive-card" data-card="2">
+                <div class="card-header">
+                    <span class="card-badge intermediate">EQUIPO</span>
+                    <span class="card-xp">+10 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/roles.png" alt="Roles Scrum" class="info-img floating delayed">
+                    <h2>ROLES EN SCRUM</h2>
+                    <div class="roles-grid">
+                        <div class="role-item">
+                            <div class="role-icon product-owner">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <h3>Product Owner</h3>
+                            <p>Define lo que se necesita y prioriza el trabajo.</p>
+                            <div class="role-responsibilities">
+                                <span>Gestión Backlog</span>
+                                <span>Definición Valor</span>
+                                <span>Decisión Final</span>
+                            </div>
+                        </div>
+                        <div class="role-item">
+                            <div class="role-icon scrum-master">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h3>Scrum Master</h3>
+                            <p>Elimina obstáculos y guía al equipo.</p>
+                            <div class="role-responsibilities">
+                                <span>Facilitación</span>
+                                <span>Coaching</span>
+                                <span>Protección</span>
+                            </div>
+                        </div>
+                        <div class="role-item">
+                            <div class="role-icon dev-team">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h3>Equipo Desarrollo</h3>
+                            <p>Construye el producto de forma colaborativa.</p>
+                            <div class="role-responsibilities">
+                                <span>Auto-organización</span>
+                                <span>Entrega Valor</span>
+                                <span>Mejora Continua</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 3 - El Sprint -->
+            <section class="card interactive-card" data-card="3">
+                <div class="card-header">
+                    <span class="card-badge advanced">CICLOS</span>
+                    <span class="card-xp">+15 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/sprint.png" alt="Ciclo de sprint" class="info-img floating">
+                    <h2>EL SPRINT</h2>
+                    <p>Un <strong>sprint</strong> dura de 2 a 4 semanas y termina con un incremento funcional del producto listo para revisión.</p>
+                    <div class="sprint-timeline">
+                        <div class="timeline-phase">
+                            <div class="phase-icon planning">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <span>Planificación</span>
+                            <div class="phase-duration">1-2 días</div>
+                        </div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-phase">
+                            <div class="phase-icon execution">
+                                <i class="bi bi-gear"></i>
+                            </div>
+                            <span>Ejecución</span>
+                            <div class="phase-duration">2-4 semanas</div>
+                        </div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-phase">
+                            <div class="phase-icon review">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <span>Revisión</span>
+                            <div class="phase-duration">2-4 horas</div>
+                        </div>
+                        <div class="timeline-arrow">→</div>
+                        <div class="timeline-phase">
+                            <div class="phase-icon retrospective">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <span>Retrospectiva</span>
+                            <div class="phase-duration">1-2 horas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 4 - Eventos Clave -->
+            <section class="card interactive-card" data-card="4">
+                <div class="card-header">
+                    <span class="card-badge intermediate">EVENTOS</span>
+                    <span class="card-xp">+10 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/kanban.png" alt="Tablero Kanban" class="info-img floating delayed">
+                    <h2>EVENTOS CLAVE</h2>
+                    <div class="events-grid">
+                        <div class="event-item">
+                            <div class="event-icon daily">
+                                <i class="bi bi-calendar-day"></i>
+                            </div>
+                            <h3>Daily Scrum</h3>
+                            <p>Reunión diaria de 15 min para planificar el día</p>
+                            <div class="event-duration">15 min</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-icon review">
+                                <i class="bi bi-presentation"></i>
+                            </div>
+                            <h3>Revisión de Sprint</h3>
+                            <p>Presentación del avance al final del sprint</p>
+                            <div class="event-duration">2-4 horas</div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-icon retrospective">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h3>Retrospectiva</h3>
+                            <p>Reflexión para mejorar el próximo ciclo</p>
+                            <div class="event-duration">1-2 horas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 5 - Artefactos -->
+            <section class="card interactive-card" data-card="5">
+                <div class="card-header">
+                    <span class="card-badge advanced">HERRAMIENTAS</span>
+                    <span class="card-xp">+15 XP</span>
+                </div>
+                <div class="card-content">
+                    <img src="../src/img/kanban.png" alt="Tablero Kanban" class="info-img floating">
+                    <h2>ARTEFACTOS SCRUM</h2>
+                    <div class="artifacts-container">
+                        <div class="artifact">
+                            <div class="artifact-icon product-backlog">
+                                <i class="bi bi-list-check"></i>
+                            </div>
+                            <div class="artifact-info">
+                                <h3>Product Backlog</h3>
+                                <p>Lista priorizada de todo lo que el producto necesita</p>
+                                <div class="artifact-owner">Product Owner</div>
+                            </div>
+                        </div>
+                        <div class="artifact">
+                            <div class="artifact-icon sprint-backlog">
+                                <i class="bi bi-kanban"></i>
+                            </div>
+                            <div class="artifact-info">
+                                <h3>Sprint Backlog</h3>
+                                <p>Trabajo seleccionado para el sprint actual</p>
+                                <div class="artifact-owner">Equipo Desarrollo</div>
+                            </div>
+                        </div>
+                        <div class="artifact">
+                            <div class="artifact-icon increment">
+                                <i class="bi bi-rocket"></i>
+                            </div>
+                            <div class="artifact-info">
+                                <h3>Incremento</h3>
+                                <p>Resultado funcional listo para entregar</p>
+                                <div class="artifact-owner">Stakeholders</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Tarjeta 6 - Beneficios y Tips -->
+            <section class="card interactive-card" data-card="6">
+                <div class="card-header">
+                    <span class="card-badge expert">MEJORES PRÁCTICAS</span>
+                    <span class="card-xp">+20 XP</span>
+                </div>
+                <div class="card-content">
+                    <div class="benefits-tips-grid">
+                        <div class="benefits-section">
+                            <h3>BENEFICIOS SCRUM</h3>
+                            <div class="benefits-list">
+                                <div class="benefit-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Entrega continua de valor</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Comunicación constante</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Adaptación rápida a cambios</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Mayor transparencia</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="bi bi-check-circle"></i>
+                                    <span>Colaboración mejorada</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tips-section">
+                            <h3>TIPS SCRUM MASTER</h3>
+                            <div class="tips-list">
+                                <div class="tip-item">
+                                    <i class="bi bi-kanban"></i>
+                                    <span>Usa tableros visuales Kanban</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="bi bi-clock"></i>
+                                    <span>Reuniones cortas y efectivas</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="bi bi-star"></i>
+                                    <span>Prioriza valor para el cliente</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="bi bi-people"></i>
+                                    <span>Promueve auto-organización</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="bi bi-graph-up"></i>
+                                    <span>Mide velocidad del equipo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="completion-check">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+            </section>
+
+            <!-- Coach Scrum Interactivo -->
+            <section class="scrum-coach">
+                <div class="coach-container">
+                    <div class="coach-avatar">
+                        <img src="../src/img/personaje.png" alt="Coach Scrum" class="coach-image floating">
+                        <div class="coach-status">
+                            <div class="status-dot"></div>
+                            <span>Scrum Master Online</span>
+                        </div>
+                    </div>
+                    <div class="coach-dialogue">
+                        <div class="dialogue-content" id="coach-speech">
+                            ¡Hola! Soy tu coach Scrum. Haz clic en las tarjetas para dominar el framework ágil.
+                        </div>
+                        <div class="dialogue-actions">
+                            <button class="coach-button" id="next-advice">
+                                <i class="bi bi-arrow-right"></i>
+                                SIGUIENTE CONSEJO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
-        <br>
-        <button class="game-button" onclick="location.href='teoria_hub.html'">Regresar</button>
-        <br><br>
+
+
+        <!-- Botón de acción principal -->
+        <button class="game-button primary-action" id="complete-scrum">
+            <i class="bi bi-flag"></i>
+            COMPLETAR MÓDULO SCRUM
+            <span class="xp-bonus">+75 XP</span>
+        </button>
+    </div>
 
     <audio id="miAudio" src="../src/audio/Ruins.mp3" autoplay loop muted></audio>
 
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../src/js/scrum_info.js" type="module"></script>
     <script src="../src/js/background_music.js" type="module"></script>
 </body>
 </html>

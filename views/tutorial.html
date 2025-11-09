@@ -5,40 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PMYSCURM - Tutorial</title>
     <link rel="stylesheet" href="../src/css/tutorial.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body id="game-screen">
 
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+
     <div class="header tutorial-header"> 
-        <h1>Tutorial del Juego</h1>
+        <h1>TUTORIAL - APRENDE A JUGAR</h1>
+    </div>
+
+    <!-- Barra de progreso del tutorial -->
+    <div class="tutorial-progress">
+        <div class="progress-steps">
+            <div class="step-marker active" data-step="0">
+                <span>1</span>
+                <div class="step-tooltip">Metodología</div>
+            </div>
+            <div class="step-marker" data-step="1">
+                <span>2</span>
+                <div class="step-tooltip">Cómo Jugar</div>
+            </div>
+            <div class="step-marker" data-step="2">
+                <span>3</span>
+                <div class="step-tooltip">Decisiones</div>
+            </div>
+            <div class="step-marker" data-step="3">
+                <span>4</span>
+                <div class="step-tooltip">Resultados</div>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="tutorial-progress"></div>
+        </div>
     </div>
 
     <div class="game-content tutorial-content">
 
-    <div class="character-container">
-        <div class="character">
-            <img src="../src/img/personaje.png" alt="Personaje Pixelado Guía" class="pixel-character-image">
-        </div>
-        <div class="dialog-bubble" id="dialog-bubble">
+        <!-- Personaje guía mejorado -->
+        <div class="character-container">
+            <div class="character">
+                <img src="../src/img/personaje.png" alt="Personaje Pixelado Guía" class="pixel-character-image">
+                <div class="character-shadow"></div>
+                <!-- Efectos de partículas alrededor del personaje -->
+                <div class="character-particles"></div>
             </div>
+            <div class="dialog-bubble" id="dialog-bubble">
+                <div class="dialog-content" id="dialog-content"></div>
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de paso mejorado -->
+        <div class="step-indicator">
+            <p class="step-label" id="step-label">PASO 1:</p>
+            <h2 class="step-title" id="step-title">ESCOGER METODOLOGÍA</h2>
+            <div class="step-badges">
+                <span class="badge time-badge"><i class="bi bi-clock"></i> 2min</span>
+                <span class="badge xp-badge"><i class="bi bi-star"></i> +10 XP</span>
+            </div>
+        </div>
+
+        <!-- Contenedor de imagen mejorado -->
+        <div class="tutorial-image-container">
+            <div class="image-frame">
+                <img src="../src/img/paso1.png" alt="Metodología SCRUM vs PMBOK" class="tutorial-image" id="step-image">
+                <div class="image-overlay">
+                    <div class="zoom-hint">
+                        <i class="bi bi-zoom-in"></i>
+                        <span>Haz clic para ampliar</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Indicadores de imagen -->
+            <div class="image-indicators">
+                <div class="indicator active" data-step="0"></div>
+                <div class="indicator" data-step="1"></div>
+                <div class="indicator" data-step="2"></div>
+                <div class="indicator" data-step="3"></div>
+            </div>
+        </div>
+
+        <!-- Controles de navegación mejorados -->
+        <div class="navigation-controls">
+            <button class="game-button nav-button previous" id="prev-button" onclick="changeStep(-1)" disabled>
+                <i class="bi bi-arrow-left"></i>
+                VOLVER A INTRO
+            </button>
+            
+            <div class="nav-info">
+                <span class="current-step" id="current-step">1</span>
+                <span class="step-separator">/</span>
+                <span class="total-steps" id="total-steps">4</span>
+            </div>
+            
+            <button class="game-button nav-button next" id="next-button" onclick="changeStep(1)">
+                SIGUIENTE
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Panel de consejos rápidos - MOVIDO A LA IZQUIERDA -->
+        <div class="tips-panel left-tips">
+            <h3 class="tips-title">
+                <i class="bi bi-lightbulb"></i>
+                CONSEJO RÁPIDO
+            </h3>
+            <p class="tips-content" id="tips-content">Completa el tutorial para ganar +50 XP de bonificación</p>
+        </div>
+
+        <!-- Efectos de logro -->
+        <div class="achievement-popup" id="achievement-popup">
+            <div class="achievement-icon">
+                <i class="bi bi-trophy"></i>
+            </div>
+            <div class="achievement-content">
+                <h4>LOGRO DESBLOQUEADO</h4>
+                <p>+10 XP - Primer paso completado</p>
+            </div>
+        </div>
     </div>
 
-        <div class="step-indicator">
-            <p class="step-label" id="step-label">Paso 1:</p>
-            <h2 class="step-title" id="step-title">Escoger Metodologia</h2>
-        </div>
-
-        <div class="tutorial-image-container">
-             <img src="../src/img/paso1.png" alt="Metodología SCRUM vs PMBOK" class="tutorial-image" id="step-image">
-        </div>
-
-        <div class="navigation-controls">
-            <button class="game-button nav-button previous" id="prev-button" onclick="changeStep(-1)" disabled>&#9664;  Anterior</button>
-            <button class="game-button nav-button next" id="next-button" onclick="changeStep(1)">Siguiente &#9654;</button>
+    <!-- Modal para imagen ampliada -->
+    <div class="image-modal" id="image-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" alt="Imagen ampliada" id="modal-image">
         </div>
     </div>
 
     <audio id="miAudio" src="../src/audio/Ruins.mp3" autoplay loop muted></audio>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../src/js/tutorial.js" type="module"></script>
     <script src="../src/js/background_music.js" type="module"></script>
 </body>

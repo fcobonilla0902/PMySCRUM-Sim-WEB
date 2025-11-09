@@ -1,10 +1,3 @@
-/*
- * VERIFICA ESTA SECCIÓN:
- * 1. Asegúrate de que tienes una carpeta llamada 'fonts'
- * 2. Asegúrate de que el archivo 'PressStart2P.ttf' está DENTRO de esa carpeta.
- * 3. Si el archivo está en la misma carpeta que styles.css, cambia la ruta a: src: url('PressStart2P.ttf')
- */
-/* AÑADIDO: Importa la fuente "Press Start 2P" desde la web */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
@@ -26,24 +19,42 @@
     --color-button-primary-hover: #3A5F90; 
     --color-coming-soon: #E3B448; /* Usamos el color de acento para que no choque */
 
+    /* Nuevos colores para gamificación */
+    --color-easy: #4cd964;
+    --color-medium: #ffcc00;
+    --color-hard: #ff9500;
+    --color-expert: #ff3b30;
+    --color-master: #8e44ad;
+    --color-locked: #666;
+
     zoom: 85%;
 }
 
-/* 👾 Efecto de escaneo y tipografía base de juego */
+/* Efecto de escaneo y tipografía base de juego */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: var(--color-background); /* APLICADO: Fondo oscuro de mazmorra */
+    background: linear-gradient(135deg, #0D1B2A, #1B263B, #415A77);
+    color: var(--color-text-light);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
-    overflow: hidden; 
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* 📺 Simulación de pantalla CRT */
+/* Partículas de fondo */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Simulación de pantalla CRT */
 #game-screen::after {
     content: '';
     position: absolute;
@@ -60,33 +71,56 @@ body {
     );
     pointer-events: none; 
     opacity: 0.3;
-    z-index: 100;
+    z-index: 0;
 }
 
 /* Encabezado principal (Banner de Título) */
 .header {
     width: 100%;
-    background-color: var(--color-header); /* APLICADO: Azul pizarra oscuro */
+    background-color: var(--color-header);
     padding: 15px 0;
     text-align: center;
     box-sizing: border-box;
-    border-top: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    border-bottom: 10px solid var(--color-border-accent); /* Borde dorado/bronce */
-    z-index: 1;
-
+    border-top: 10px solid var(--color-border-accent);
+    border-bottom: 10px solid var(--color-border-accent);
+    z-index: 2;
     box-shadow: 
-        inset 0 2px 0 0 rgba(0, 0, 0, 0.2) 
+        inset 0 2px 0 0 rgba(0, 0, 0, 0.2),
         inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
-    margin-top: 0; 
+    margin-top: 0;
+    position: relative;
 }
 
 .header h1 {
-    color: var(--color-border-accent); /* APLICADO: Título en dorado/bronce */
-    /* Resplandor suave para el título */
+    color: var(--color-border-accent);
     font-size: 1.3em;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 4px; 
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* BOTÓN DE REGRESAR */
+.back-button {
+    position: absolute;
+    top: 100px;
+    left: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid var(--color-border-accent);
+    background-color: var(--color-card-bg);
+    color: var(--color-text-light);
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #000;
+    transition: all 0.2s ease-in-out;
+    z-index: 20;
+}
+
+.back-button:hover {
+    background-color: var(--color-button-primary-hover);
+    transform: translateY(-3px);
 }
 
 /* Contenido Principal de la Pantalla */
@@ -94,14 +128,116 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1; 
+    flex-grow: 1;
     padding: 20px;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
+}
+
+/* Estadísticas del jugador */
+.player-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    background: rgba(27, 38, 59, 0.8);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid var(--color-border-accent);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.stat-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-label {
+    color: var(--color-border-accent);
+    font-size: 0.6em;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    color: var(--color-text-light);
+    font-size: 1.2em;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 2px solid var(--color-border-accent);
+}
+
+/* Progreso de metodologías */
+.methodology-progress {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.progress-label {
+    color: var(--color-text-light);
+    font-size: 0.7em;
+    text-transform: uppercase;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--color-border-accent);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 1.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.scrum-progress {
+    background: linear-gradient(90deg, var(--color-easy), var(--color-medium));
+}
+
+.pmbok-progress {
+    background: linear-gradient(90deg, var(--color-easy), var(--color-medium));
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.progress-percent {
+    color: var(--color-border-accent);
+    font-size: 0.7em;
 }
 
 /* Texto de Instrucción General */
 .game-instruction {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
+    color: var(--color-text-light);
     font-size: 0.9em;
     margin: 20px auto 30px auto;
     text-transform: uppercase;
@@ -111,77 +247,193 @@ body {
     max-width: 800px;
 }
 
+.sub-instruction {
+    color: var(--color-border-accent);
+    font-size: 0.7em;
+    display: block;
+    margin-top: 10px;
+}
+
 /* Contenedor de las Tarjetas */
 .cards-container {
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-/* Estilo de Tarjeta Individual (como elementos de un menú de juego) */
+/* Estilo de Tarjeta Individual MEJORADO */
 .game-card {
-    background-color: var(--color-card-bg); /* APLICADO: Gris azulado medio (color de HUD) */
-    width: 170px;
-    height: 170px;
-    border: 4px solid var(--color-border-accent); /* APLICADO: Dorado viejo/bronce */
-    border-radius: 10px;
+    background-color: var(--color-card-bg);
+    width: 180px;
+    height: 220px;
+    border: 4px solid var(--color-border-accent);
+    border-radius: 15px;
     box-shadow: 8px 8px 0px 0px var(--color-text-dark),
-                0 0 15px 5px rgba(227, 180, 72, 0.5); /* Resplandor dorado/bronce */
+                0 0 15px 5px rgba(227, 180, 72, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: all 0.3s ease;
     position: relative;
+    overflow: hidden;
 }
 
-.game-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 10px 10px 0px 0px var(--color-text-dark),
+.game-card.unlocked:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 12px 12px 0px 0px var(--color-text-dark),
                 0 0 25px 8px rgba(227, 180, 72, 0.7);
 }
 
 .game-card p {
-    color: var(--color-text-light); /* APLICADO: Blanco/Gris claro */
-    font-size: 1.1em;
-    margin: 10px 0;
+    color: var(--color-text-light);
+    font-size: 0.8em;
+    margin: 8px 0;
 }
 
-.game-card .card-icon {
-    width: 80px;
-    height: 80px;
+.game-card img {
+    max-height: 80px;
     image-rendering: pixelated;
-    filter: drop-shadow(0 0 5px rgba(240, 244, 248, 0.8)); /* Resplandor claro al icono */
+    transition: transform 0.3s ease;
 }
 
-.game-card .bottom-icon {
-    margin-top: 20px;
+.game-card.unlocked:hover img {
+    transform: scale(1.1);
 }
 
-/* Estilo específico para la tarjeta "Próximamente" */
-.game-card.coming-soon {
-    background-color: rgba(65, 90, 119, 0.5); /* Tono más claro y transparente de la tarjeta */
+/* Header de la tarjeta */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.difficulty-badge {
+    font-size: 0.6em;
+    padding: 4px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+.difficulty-badge.easy {
+    background: var(--color-easy);
+    color: var(--color-text-dark);
+}
+
+.difficulty-badge.medium {
+    background: var(--color-medium);
+    color: var(--color-text-dark);
+}
+
+.difficulty-badge.hard {
+    background: var(--color-hard);
+    color: var(--color-text-light);
+}
+
+.difficulty-badge.expert {
+    background: var(--color-expert);
+    color: var(--color-text-light);
+}
+
+.difficulty-badge.master {
+    background: var(--color-master);
+    color: var(--color-text-light);
+}
+
+.xp-reward {
+    color: var(--color-border-accent);
+    font-size: 0.6em;
+    background: rgba(0,0,0,0.3);
+    padding: 4px 6px;
+    border-radius: 8px;
+}
+
+/* Footer de la tarjeta */
+.card-footer {
+    width: 100%;
+    margin-top: auto;
+}
+
+.card-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6em;
+    color: var(--color-text-light);
+}
+
+.card-stats span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Indicador de selección */
+.selection-indicator {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--color-border-accent);
+    color: var(--color-text-dark);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.game-card.unlocked:hover .selection-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Tarjetas bloqueadas */
+.game-card.locked {
+    background-color: rgba(65, 90, 119, 0.4);
+    border-color: var(--color-locked);
     box-shadow: 8px 8px 0px 0px var(--color-text-dark);
     cursor: not-allowed;
-    justify-content: center;
-    border-color: #555; /* Borde más opaco */
 }
 
-.game-card.coming-soon:hover {
+.game-card.locked:hover {
     transform: none;
     box-shadow: 8px 8px 0px 0px var(--color-text-dark);
 }
 
-.game-card.coming-soon p {
-    color: var(--color-coming-soon); /* APLICADO: Dorado viejo/bronce */
-    font-size: 1.3em;
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-border-accent);
 }
 
+.locked-overlay i {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
 
-/* 💡 Animación de parpadeo (usada para "PRÓXIMAMENTE") */
+.locked-overlay p {
+    font-size: 0.7em;
+    color: var(--color-border-accent);
+}
+
+/* 💡 Animación de parpadeo */
 @keyframes blink-animation {
     50% { opacity: 0; }
 }
@@ -189,16 +441,26 @@ body {
     animation: blink-animation 1s steps(1, start) infinite;
 }
 
+/* Animación de pulso */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.pulse {
+    animation: pulse 2s infinite;
+}
+
 /* Botón "Ver Tutorial" */
 .game-button {
-    background-color: var(--color-button-primary); /* APLICADO: Rojo de acción (o el color que elijas para START) */
-    color: var(--color-text-light); /* Texto claro en el botón */
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
     text-shadow: 1px 1px #000;
     font-family: 'Press Start 2P', cursive;
     font-size: 1.1em;
     padding: 18px 50px;
     border: 4px solid var(--color-text-dark);
-    border-radius: 8px; 
+    border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.1s ease;
@@ -207,15 +469,132 @@ body {
     position: relative;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .game-button:hover {
-    background-color: var(--color-button-primary-hover); 
+    background-color: var(--color-button-primary-hover);
 }
 
 .game-button:active {
     box-shadow: 0px 0px 0px 0px var(--color-text-dark),
                 inset 0 0 0 rgba(0, 0, 0, 0.2);
-    top: 6px; 
+    top: 6px;
     left: 6px;
 }
+
+/* Efectos de sonido visuales */
+.sound-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(227, 180, 72, 0.3);
+    animation: soundWave 0.5s ease-out;
+}
+
+@keyframes soundWave {
+    to {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-container {
+        gap: 15px;
+    }
+    
+    .game-card {
+        width: 150px;
+        height: 200px;
+    }
+    
+    .player-stats {
+        gap: 15px;
+        padding: 10px 20px;
+    }
+    
+    .methodology-progress {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .progress-bar {
+        width: 150px;
+    }
+    
+    .back-button {
+        top: 80px;
+        left: 15px;
+    }
+}
+
+/* Estilos para las tarjetas completadas */
+.game-card.completed {
+    border: 3px solid #28a745;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.3);
+    position: relative;
+}
+
+.game-card.completed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, transparent 50%);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+/* Badge de completado */
+.completion-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #28a745;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(40, 167, 69, 0.5);
+    z-index: 2;
+    animation: pulse-green 2s infinite;
+}
+
+.completion-badge i {
+    color: white;
+    font-size: 16px;
+}
+
+/* Animación para el badge de completado */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+    }
+}
+
+/* Efecto hover para tarjetas completadas */
+.game-card.completed:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: #20c997;
+    box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+}
+
